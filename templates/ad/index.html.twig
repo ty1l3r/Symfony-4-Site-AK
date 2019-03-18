@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Track List {% endblock %}
+
+{% block body %}
+<div class="container mt-2">
+    <a href=" {{ path('tr-create')}} " class="btn btn-success ml-3 ">Ajouter</a>
+     
+     <br/>
+</div>
+
+<div class="container mt-2">
+
+   
+
+    {% for ad in ads %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <div class="card border-secondary mb-3 ">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ ad.title}}</h4>
+                        <hr>
+                        <div class="card-text">
+                            <img class="float-left mr-3" src=" {{ ad.image }}" alt="imgTrack">
+                            <p><strong> Genre : </strong>{{ ad.genre }} </p>
+                            <p><strong> Durée : </strong>{{ ad.duree| date('H:i') }} </p>
+                            <p><strong> Année de sortie: </strong>{{ ad.annee }} </p>
+                            <p><strong> Prix : </strong>{{ ad.price }} Euros </p>
+                            <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-success float-right"><small>Ecouter</small> </a>
+                             <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-warning float-right"><small>Editer</small> </a>
+                             <a href=" {{ path('tr-del', {'id': ad.id}) }} " class="btn btn-danger float-right "> <small>Delete</small> </a>
+                            
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+                      <div class="col">
+
+                <div class="card border-secondary mb-3 ">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ ad.title}}</h4>
+                        <hr>
+                        <div class="card-text">
+                            <img class="float-left mr-3" src=" {{ ad.image }}" alt="imgTrack">
+                            <p><strong> Genre : </strong>{{ ad.genre }} </p>
+                            <p><strong> Durée : </strong>{{ ad.duree| date('H:i') }} </p>
+                             <p><strong> Année de sortie: </strong>{{ ad.annee }} </p>
+                            <p><strong> Prix : </strong>{{ ad.price }} Euros </p>
+                           
+                               <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-success float-right"><small>Ecouter</small> </a>
+                             <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-warning float-right"><small>Editer</small> </a>
+                             <a href="{{ path('tr-del', {'id':ad.id}) }}" class="btn btn-danger float-right "> <small>Delete</small> </a>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+  {% endfor %}
+
+</div>
+
+{% endblock %}

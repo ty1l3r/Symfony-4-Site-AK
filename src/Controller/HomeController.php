@@ -9,6 +9,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class HomeController extends Controller
 {
+    /**
+     * @Route("/hello/{prenom}", name="hello")
+     * Montre la page qui dit Bonjour
+     * @return void
+     */
+
+    public function hello($prenom)
+    {
+        return new Response("Bonjour".$prenom);
+    }
+
 
     /**
      * @Route("/", name="homepage")
