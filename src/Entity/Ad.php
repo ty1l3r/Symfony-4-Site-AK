@@ -21,7 +21,7 @@ class Ad
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
-     * min = 8,
+     * min = 2,
      * max = 30,
      * minMessage = " Title must be at least {{ limit }} characters long",
      * maxMessage = "Your first name cannot be longer than {{ limit }} characters")
@@ -51,13 +51,12 @@ class Ad
 
     /**
      * @ORM\Column(type="float")
-     * @Assert\Type(type="float",
-     * message="The value {{ value }} is not valid")
+     * @Assert\Type(
+     * type="float",
+     * message="The value {{ value }} is not a valid {{ type }}.")
      * @Assert\Length(
      * min = 4,
-     * max = 4,
-     * minMessage = " En {{ limit }}  ? Vraiment ?",
-     * maxMessage = "  {{ limit }} ? Demain ! C'est loin ;)")
+     * max = 4,)
      */
 
     private $annee;
@@ -100,6 +99,9 @@ class Ad
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
+
+   
+    
 
     public function getId(): ?int
     {
@@ -213,4 +215,7 @@ class Ad
 
         return $this;
     }
+
+  
+   
 }
