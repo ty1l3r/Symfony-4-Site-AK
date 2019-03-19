@@ -14,23 +14,13 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Repository\AdRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Repository\UserRepository;
+use Doctrine\Tests\Common\DataFixtures\TestEntity\User as DoctrineUser;
+use ProxyManager\ProxyGenerator\ValueHolder\MethodGenerator\Constructor;
 
 class AccountController extends AbstractController
 {   
-    /**
-     *@Route ("/fanzone", name="fan")
-     *
-     */
 
-    public function fan(AdRepository $repo)
-    {
-       
-     
-
-        return $this->render('account/user-page.html.twig', [
-         
-        ]);
-    }
 
     /**
      * Permet d'afficher  et de gérer le form de connection
@@ -102,5 +92,21 @@ class AccountController extends AbstractController
         
     }
 
+        /**
+     *@Route ("/fanzone", name="fan")
+     *
+     */
+
+    public function fan( AdRepository $repo)
+   {
+
+    $ads = $this->getDoctrine()
+    ->getRepository(User::class)
+    ->findAll();  
+    return $this->render('ad/user-page.html.twig', [
+           'ads' => $ads
+       ]);
+
+   }
 
 }

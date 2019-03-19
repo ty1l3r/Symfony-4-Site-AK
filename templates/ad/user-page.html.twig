@@ -15,21 +15,24 @@
 		</div>
 
 
+{% for ad in ads %}
+	
 
 
 	<div class="col-md-10 offset-md-1 row-block">
 			<ul id="sortable">
 	<p class="ml-1"> </p>
+	<p>  {{ ad.firstName }}  </p>
 	<li>
 		<div class="media">
 		
 			<div class="media-left align-self-center">
-				<img class="rounded-circle" src=" {{ ad.user.picture}}">
+				<img class="rounded-circle" src=" {{ ad.picture }} ">
 			</div>
 			<div class="media-body">
 				<h4> </h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-					magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+				<p> {{ ad.introduction  }}  </p>
+				
 			</div>
 			<div class="media-right align-self-center">
 				<a href="#" class="btn btn-default">Contact Now</a>
@@ -37,13 +40,13 @@
 
 		</div>
 	</li>
-			
+		
 
 	
 			</ul>
 	
 	</div>
-
+{% endfor %}	
 </section>
 
 <script>
