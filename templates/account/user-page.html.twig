@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Connexion {% endblock %}
+
+{% block body %}
+
+
+
+
+<section class="row-section">
+	<div class="container">
+		<div class="row">
+			<h2 class="text-center"><span>H4KH4 '$ USERS</span>Created with <i class="fa fa-heart"></i> from<a href="Appal-Citizen">
+					Appall-Citizen</a></h2>
+		</div>
+
+
+
+
+	<div class="col-md-10 offset-md-1 row-block">
+			<ul id="sortable">
+	<p class="ml-1"> </p>
+	<li>
+		<div class="media">
+		
+			<div class="media-left align-self-center">
+				<img class="rounded-circle" src=" {{ ad.user.picture}}">
+			</div>
+			<div class="media-body">
+				<h4> </h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+					magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+			</div>
+			<div class="media-right align-self-center">
+				<a href="#" class="btn btn-default">Contact Now</a>
+			</div>
+
+		</div>
+	</li>
+			
+
+	
+			</ul>
+	
+	</div>
+
+</section>
+
+<script>
+	$(function () {
+		$("#sortable").sortable();
+		$("#sortable").disableSelection();
+	});
+</script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+ crossorigin="anonymous"></script>
+
+
+{% endblock %}

@@ -15,6 +15,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdController extends Controller
 {
+
+
+
+    /**
+     * @Route("/", name="homepage")
+     */
+
+    public function home(AdRepository $repo)
+    {
+        // return new Response("Bonjour"); // Le Response correspond à HttpFoundation\Response
+        //render est donné par la classe Controller
+        // le tableau dans render intégre la variable "title"
+        $ads = $repo->findAll();
+
+        return $this->render('home.html.twig', [
+            'ads' => $ads
+        ]
+    ); 
+    }
+
      /**========================================================== */
 
     /**
@@ -35,14 +55,19 @@ class AdController extends Controller
     /**
      * Création d'une annonce
      *@Route("/tracklist/new", name="tr-create")
+     *@Route("/tracklist/{id}/edit", name="tr-edit")
      * @return Response
      */
 
-    public function create(Request $request, ObjectManager $manager)
+    public function create(Request $request, ObjectManager $manager, Ad $ad = null)
 
 /** --------Envoi du Formulaire -------------*/
     {
-        $ad = new Ad();
+        //$ad = new Ad();
+
+        if (!$ad) {
+            $ad = new Ad();
+        }
 
         $form = $this->createForm(AdType::class, $ad);
 
@@ -91,7 +116,8 @@ class AdController extends Controller
      /**========================================================== */
 
    /**
-    * @Route ("/tracklist/{id}/del", name ="tr-del")
+    * @Route ("/track/{id}/del", name ="tr-del")
+    *
     */
    
     public function deleteArticleAction($id, AdRepository $repo, Ad $ad)
