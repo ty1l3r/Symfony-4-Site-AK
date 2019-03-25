@@ -4,11 +4,16 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdRepository")
  * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(
+ * fields={"title"},
+ * message="Track Already exist")
  */
+
 class Ad
 {
     /**
@@ -39,7 +44,7 @@ class Ad
    /**
     * @ORM\Column(type="string")
     * @Assert\Type(type="string",
-    * message="The value {{ value }} is not a valid")
+    * message=" Lettres seulement !")
     */
 
     private $genre;
@@ -50,13 +55,12 @@ class Ad
     private $duree;
 
     /**
-     * @ORM\Column(type="float")
-     * @Assert\Type(
-     * type="float",
-     * message="The value {{ value }} is not a valid {{ type }}.")
+     * @ORM\Column(type="integer")
      * @Assert\Length(
      * min = 4,
      * max = 4,)
+     * @Assert\LessThan( value = 2020, message= "Retour vers le futur ??? !" )
+     * @Assert\GreaterThan( value = 1900, message=" Je me demande bien quel âge tu as ? ;) !" )
      */
 
     private $annee;

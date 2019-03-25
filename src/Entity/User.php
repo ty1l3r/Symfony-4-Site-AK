@@ -2,15 +2,20 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Ad;
 use Cocur\Slugify\Slugify;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\EqualTo;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields={"email"}, message= "User already exist")
  */
 class User implements UserInterface
 {
@@ -23,21 +28,30 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Champ Obligatoire")
+     * @Assert\Length(min = 2, minMessage=" Spice de petit troll ! ")
+     * @Assert\Valid
+     * 
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Champ Obligatoire")
+     * @Assert\Length(min = 2, minMessage=" Spice de petit troll ! ")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message="Email non valide !")
+     * @Assert\Valid
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(message="Entrez une Url valide !")
      */
     private $picture;
 
@@ -48,8 +62,17 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=2, minMessage="Au moins 2 lettres mon coco ! ")
+     * 
      */
     private $introduction;
+
+    /**
+     * @Assert\EqualTo(propertyPath="hash")
+     */
+    public $passwordConfirm;
+
+
 
     /**
      * @ORM\Column(type="string", length=255)

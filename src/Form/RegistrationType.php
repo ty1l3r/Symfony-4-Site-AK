@@ -11,26 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class RegistrationType extends AbstractType
+class RegistrationType extends ApplicationType
 {
-    /**
-     * Permet d'avoir la configuration de base d'un champs
-     *
-     * @param string $label
-     * @param string $placeholder
-     * @param array $options
-     * @return array
-     */
-
-    private function getConfiguration($label, $placeholder, $options = [])
-    {
-        return array_merge([
-            'label' => $label,
-            'attr' => [
-                'placeholder' => $placeholder
-            ]
-            ], $options) ;
-    }
+   
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -39,6 +22,7 @@ class RegistrationType extends AbstractType
             ->add('email', EmailType::class, $this->getConfiguration("Email", "Votre adresse email"))
             ->add('picture', UrlType::class, $this->getConfiguration("Photo de profil", "URL de votre avatar ..."))
             ->add('hash', PasswordType::class, $this->getConfiguration("Mot de Passe", "Choisissez un mot de passe ..."))
+            ->add('passwordConfirm', PasswordType::class, $this->getConfiguration("Confirmation de mot de passe", "Veuillez confirmer cotre mot de passe"))
             ->add('introduction', TextType::class, $this->getConfiguration("Decription", " Présentez-vous !"))
            
         ;

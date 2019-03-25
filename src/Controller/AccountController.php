@@ -4,19 +4,21 @@ namespace App\Controller;
 
 use App\Entity\User;
 
+use App\Form\AccountType;
 use App\Form\RegistrationType;
+use App\Repository\AdRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use App\Repository\AdRepository;
-use Symfony\Component\Security\Core\User\UserInterface;
-use App\Repository\UserRepository;
-use Doctrine\Tests\Common\DataFixtures\TestEntity\User as DoctrineUser;
-use ProxyManager\ProxyGenerator\ValueHolder\MethodGenerator\Constructor;
+use App\Entity\PasswordUpdate;
+use App\Form\PasswordUpdateType;
+
+
+
 
 class AccountController extends AbstractController
 {   
@@ -41,7 +43,7 @@ class AccountController extends AbstractController
             'username' => $username
         ]);
     }
-
+ 
     /**
      * Permet de se deconnecter
      *
@@ -107,6 +109,84 @@ class AccountController extends AbstractController
            'ads' => $ads
        ]);
 
+   }
+
+   /**
+    * Permet d'afficher ela modifictaion de profil
+    *@Route("/account/profile", name="account_profile")
+    * @return Response
+    */
+
+   public function profile(Request $request, ObjectManager $manager)
+   {
+       $user = $this->getUser();
+
+       $form = $this->createForm(AccountType::class, $user);
+
+       $form->handleRequest($request);
+
+       if($form->isSubmitted() && $form->isValid())
+       {    
+           $manager->persist($user);
+           $manager->flush();
+
+           $this->addFlash(
+               'success',
+               "Les données du profil ont été enregistrée avec succès."
+           );
+       }
+
+
+
+        return $this->render('account/profile.html.twig', [
+            'form' => $form->createView()
+        ]);
+   }
+
+   /**
+    * @Route("/account/password-update", name="account_password")
+    * @return Response
+    */
+   public function updatePassword(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $manager)
+   {   
+       $passwordUpdate = new PasswordUpdate();
+       $user = $this->getUser();
+
+       $form = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
+
+       $form->handleRequest($request);
+
+       if ($form->isSubmitted() && $form->isValid()) 
+       {
+           //1. Verifier que le oldpassword soit le meme que l'utilisateur
+           if(!password_verify($passwordUpdate->getOlderPassword(), $user->getHash() )){
+                //gérer l'erreur
+           } else {
+               $newPassword = $passwordUpdate->getNewPassword();
+               $hash = $encoder->encodePassword($user, $newPassword);
+
+               $user->setHash($hash);
+
+               $manager->persist($user);
+               $manager->flush();
+
+               $this->addFlash(
+                   'success', 
+                   "Votre mot de passe a bien été modifié"
+               );
+
+               return $this->redirectToRoute('homepage');
+           }
+       }
+  
+       
+       
+
+       
+        $form = $this->createForm( PasswordUpdateType::class, $passwordUpdate);
+        return $this->render('/account/password.html.twig', [
+            'form' => $form->createView()
+        ]);
    }
 
 }
