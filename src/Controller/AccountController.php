@@ -26,7 +26,6 @@ class AccountController extends AbstractController
 
     /**
      * Permet d'afficher  et de gérer le form de connection
-     * 
      * @Route("/login", name="account_login")
      * 
      * @return Response

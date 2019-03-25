@@ -31,7 +31,7 @@ class User implements UserInterface
      * @Assert\NotBlank(message="Champ Obligatoire")
      * @Assert\Length(min = 2, minMessage=" Spice de petit troll ! ")
      * @Assert\Valid
-     * 
+     * @Assert\NotNull
      */
     private $firstName;
 
@@ -39,13 +39,14 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Champ Obligatoire")
      * @Assert\Length(min = 2, minMessage=" Spice de petit troll ! ")
+     * @Assert\Valid
+     * @Assert\NotNull
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Email(message="Email non valide !")
-     * @Assert\Valid
+     * @Assert\Email()
      */
     private $email;
 
@@ -62,7 +63,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min=2, minMessage="Au moins 2 lettres mon coco ! ")
+     * @Assert\Length(min=10, minMessage="Au moins 10 lettres mon coco ! ")
      * 
      */
     private $introduction;

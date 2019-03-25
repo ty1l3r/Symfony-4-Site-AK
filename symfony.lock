@@ -341,6 +341,12 @@
             "tests/.gitignore"
         ]
     },
+    "symfony/polyfill-ctype": {
+        "version": "v1.11.0"
+    },
+    "symfony/polyfill-iconv": {
+        "version": "v1.11.0"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.10.0"
     },

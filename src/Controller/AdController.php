@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\User\User;
 
 
-class AdController extends Controller
+class AdController extends AbstractController 
 {
 
 
