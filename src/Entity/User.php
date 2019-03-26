@@ -29,7 +29,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Champ Obligatoire")
-     * @Assert\Length(min = 2, minMessage=" Spice de petit troll ! ")
+     * @Assert\Length(min = 2, minMessage="Spice de petit troll nananana ! ")
      * @Assert\Valid
      * @Assert\NotNull
      */
@@ -38,7 +38,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Champ Obligatoire")
-     * @Assert\Length(min = 2, minMessage=" Spice de petit troll ! ")
+     * @Assert\Length(min = 2, minMessage="Spice de petit troll er  ! ")
      * @Assert\Valid
      * @Assert\NotNull
      */
@@ -64,7 +64,6 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min=10, minMessage="Au moins 10 lettres mon coco ! ")
-     * 
      */
     private $introduction;
 

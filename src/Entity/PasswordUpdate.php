@@ -4,16 +4,22 @@ namespace App\Entity;
 
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
 
 class PasswordUpdate
 {
 
-
+/**
+ * @SecurityAssert\UserPassword(
+ *     message = "Ne correspond pas à votre mot de passe actuel"
+ * )
+ */
     private $oldPassword;
 
     /**
-     * @Assert\Length (min=8, minMessage="Votre mot de passe doit faire au moins 8 caractères")
+     * @SecurityAssert\UserPassword(
+     *  message = "FAUX !!!")
      */
     private $newPassword;
 

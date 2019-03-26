@@ -5,8 +5,11 @@ namespace App\Controller;
 use App\Entity\User;
 
 use App\Form\AccountType;
+use App\Entity\PasswordUpdate;
 use App\Form\RegistrationType;
+use App\Form\PasswordUpdateType;
 use App\Repository\AdRepository;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,8 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use App\Entity\PasswordUpdate;
-use App\Form\PasswordUpdateType;
 
 
 
@@ -135,57 +136,55 @@ class AccountController extends AbstractController
            );
        }
 
-
-
         return $this->render('account/profile.html.twig', [
             'form' => $form->createView()
         ]);
    }
 
-   /**
-    * @Route("/account/password-update", name="account_password")
+/**
+    * Permet de modifier le mot de passe
+    *@Route ("/account/password-update", name="account_password")
     * @return Response
     */
-   public function updatePassword(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $manager)
-   {   
-       $passwordUpdate = new PasswordUpdate();
-       $user = $this->getUser();
 
-       $form = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
+    public function updatePassword(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $manager) {
+        $passwordUpdate = new PasswordUpdate();
 
-       $form->handleRequest($request);
+        $user = $this->getUser();
 
-       if ($form->isSubmitted() && $form->isValid()) 
-       {
-           //1. Verifier que le oldpassword soit le meme que l'utilisateur
-           if(!password_verify($passwordUpdate->getOlderPassword(), $user->getHash() )){
+        $form = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            if(!password_verify($passwordUpdate->getOldPassword(), $user->getHash() )){
                 //gérer l'erreur
-           } else {
-               $newPassword = $passwordUpdate->getNewPassword();
-               $hash = $encoder->encodePassword($user, $newPassword);
+            }  else {    
 
-               $user->setHash($hash);
+                $newPassword = $passwordUpdate->getNewPassword();
+                $hash = $encoder->encodePassword($user, $newPassword);
 
-               $manager->persist($user);
-               $manager->flush();
+                $user->setHash($hash);
 
-               $this->addFlash(
-                   'success', 
-                   "Votre mot de passe a bien été modifié"
-               );
+                $manager->persist($user);
+                $manager->flush();
 
-               return $this->redirectToRoute('homepage');
-           }
-       }
-  
-       
-       
+                $this->addFlash(
+                    'success',
+                    "mot de passe OK"
+                );
 
-       
-        $form = $this->createForm( PasswordUpdateType::class, $passwordUpdate);
-        return $this->render('/account/password.html.twig', [
+                return $this->redirectToRoute('/homepage');
+            }
+            
+        }
+
+
+
+        return $this->render('account/password.html.twig', [
             'form' => $form->createView()
         ]);
-   }
+    }
+
+   
 
 }
