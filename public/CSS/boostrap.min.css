@@ -81,9 +81,22 @@ body {
     text-align: left;
     background-color: #060606
 }
-
+.p2{
+padding-left: 1px;
+margin-bottom: -2px;
+margin-top: 14px;
+}
+.p3{
+    text-align: -moz-center;
+    margin: 12px 40px 4px 40px;
+}
 [tabindex="-1"]:focus {
     outline: 0 !important
+}
+.rounded-circle1{
+    border-radius: 50%;
+    height: 66px !important;
+ 
 }
 
 hr {

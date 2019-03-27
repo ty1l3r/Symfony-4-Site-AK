@@ -157,6 +157,7 @@ class AccountController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             if(!password_verify($passwordUpdate->getOldPassword(), $user->getHash() )){
+                $form->get('oldPassword')->addError(new FormError("le mot de passe est incorect"));
                 //gérer l'erreur
             }  else {    
 

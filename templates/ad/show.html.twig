@@ -6,56 +6,75 @@
 
 {% block body %}
 
-
-<div class="contrainer">
-
 <h1> </h1>
+
 <div class="container">
-<div class="row">
-    <div class="col order-2">
-
-        <div class="card border-secondary mb-3 ">
-            <div class="card-body">
-                <h4 class="card-title">{{ ad.title}} 
-                 <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-danger float-right">DELETE</a>
-                 <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-warning float-right">EDITER</a>
-                 </h4>
-                <hr>
-                <div class="card-text">
-                    <img class="float-left mr-3" src=" {{ ad.image }}" alt="imgTrack">
-                    <p><strong> Genre : </strong>{{ ad.genre }} </p>
-                    <p><strong> Durée : </strong>{{ ad.duree| date('H:i') }} </p>
-                    <p><strong> Année de sortie: </strong>{{ ad.annee }} </p>
-                    <p><strong> Prix : </strong>{{ ad.price }} Euros </p>
-
-                   
-                    <br />
-                    <br />
-
-                    <audio controls data-info-album-art="http://farm5.staticflickr.com/4050/4353986539_ec89b52698_d.jpg"
-                        data-info-album-title="8874" data-info-artist="Billy Murray" data-info-title="Come, take a trip in my air-ship"
-                        data-info-label="Edison Gold Moulded Record" data-info-year="1905" data-info-att="University of California, Santa Barbara Library."
-                        data-info-att-link="http://cylinders.library.ucsb.edu/search.php?query=8874">
-                        <source src="/bootstrap-player/media/cusb-cyl2985d.ogg" type="audio/ogg" />
-                        <source src="/bootstrap-player/media/cusb-cyl2985d.mp3" type="audio/mpeg" />
-                        <a href="/bootstrap-player/media/cusb-cyl2985d.mp3">cusb_cyl2985d</a>
-                    </audio>
-                     <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-success float-right">Acheter</a>
-                   
-                     
+    <div class="row">
+        <div class="col order-2">
+            <div class="card border-secondary mb-3 ">
+                <div class="card-body">
+                    <h4 class="card-title">{{ ad.title}}
+                        <p><strong> </strong>{{ ad.genre }}</p>
+                        <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-danger float-right">DELETE</a>
+                        <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-warning float-right">EDITER</a>
+                    </h4>
+                    <hr>
+                    <div class="card-text">
+                        <img class="float-left mr-3" src=" {{ ad.image }}" alt="imgTrack">
+                        <p><strong> Genre : </strong>{{ ad.genre }} </p>
+                        <p><strong> Durée : </strong>{{ ad.duree| date('H:i') }} </p>
+                        <p><strong> Année de sortie: </strong>{{ ad.annee }} </p>
+                        <p><strong> Prix : </strong>{{ ad.price }} Euros </p>
+                        <br />
+                        <br />
+                        <audio controls
+                            data-info-album-art="http://farm5.staticflickr.com/4050/4353986539_ec89b52698_d.jpg"
+                            data-info-album-title="8874" data-info-artist="Billy Murray"
+                            data-info-title="Come, take a trip in my air-ship"
+                            data-info-label="Edison Gold Moulded Record" data-info-year="1905"
+                            data-info-att="University of California, Santa Barbara Library."
+                            data-info-att-link="http://cylinders.library.ucsb.edu/search.php?query=8874">
+                            <source src="/bootstrap-player/media/cusb-cyl2985d.ogg" type="audio/ogg" />
+                            <source src="//Users/hakha/Desktop/01 - Greenland.mp3" type="audio/mpeg" />
+                            <a href="/bootstrap-player/media/cusb-cyl2985d.mp3">cusb_cyl2985d</a>
+                        </audio>
+                        <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-success float-right">Acheter</a>
+                    </div>
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
 
-</div>
+<div class="container">
+    <div class="row">
+        <div class="col order-2">
+            <div class="card border-secondary mb-3 ">
+                <div class="card-body">
 
-<div class="row">
+		<div class="media">
+		
+			<div class="media-left align-self-center">
+				<img class="rounded-circle1" src=" {{ ad.author.picture }}"
+                alt="avatar de {{ad.author.firstName}}"><p class="p2">{{ad.author.firstName}} a posté 
+                {{ ad.author.ads | length}} tracks</p>
 
+			</div>
+			<div class="media-body">
+				<h4> </h4>
+				<p class="p3"> {{ad.author.introduction}}</p>
+				
+			</div>
+			<div class="media-right align-self-center">
+				<a href="#" class="btn btn-default">Contact Now</a>
+			</div>
+
+		</div>
+
+                </div>
+            </div>
+        </div>
     </div>
+ 
 </div>
-
 {% endblock %}
