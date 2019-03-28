@@ -74,13 +74,24 @@ section {
 body {
     margin: 0;
 
-    font-size: 12px;
+    font-size: 19px;
     font-weight: 400;
     line-height: 1.5;
     color: #e7e1e1;
     text-align: left;
     background-color: #060606
     
+}
+.row10{
+
+flex-wrap: wrap-reverse;
+margin-right: -15px;
+margin-left: -15px;
+}
+.container5{
+    width: 80%;
+    text-align: center;
+    height: auto;
 }
 
 .image1{
@@ -101,8 +112,10 @@ body {
 }
 
 .p3 {
-    text-align: -moz-center;
-    margin: 12px 40px 4px 40px;
+    margin: -4px 39px 0px 78px;
+text-align: justify;
+text-justify: inter-word;
+Line-Height: 14pt;
 }
 
 [tabindex="-1"]:focus {
@@ -112,6 +125,7 @@ body {
 .rounded-circle1 {
     border-radius: 50%;
     height: 66px !important;
+    margin: -6px 1px 1px 2px;
 
 }
 

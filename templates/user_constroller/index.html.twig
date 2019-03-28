@@ -24,25 +24,30 @@
               <h5>Contributions de {{user.firstName}}</h5> 
 
             {% if user.ads | length >0 %}
-                <div class="row">
+
+
                     {% for ad in user.ads %}    
-
+       </div>       
+    </div>
+ </div>
+</div>
 <!-- ======================  -->    
-                        
-{% include  'ad/_ad.html.twig' %}
 
+<div class="container mt-3 mb-3 "> 
+ <div class="row10">
+{% include  'ad/_ad.html.twig' %}
+</div>
+ </div> 
+ 
 <!-- ======================  -->
                     {% endfor %}
-                </div>
+
             {% else %}
                 <div class="alert alert-warning">
                     <p><strong>{{user.firstname}} {{user.lastName}} n'as pas encore posté de Track </strong></p>
                 </div>
             {% endif %}
             
-        </div>       
-    </div>
- </div>
-</div>
+ 
 
 {% endblock %}

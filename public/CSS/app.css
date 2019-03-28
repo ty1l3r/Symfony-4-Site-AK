@@ -56,8 +56,12 @@ p {
     text-align: center;
     display: inline-flex;
 }
+.rowsocial{
+    font-size: 21px;
+}
 .row1{
     display: ruby-base-container;
+    text-align: center;
 }
 
 .row-section .row-block {
