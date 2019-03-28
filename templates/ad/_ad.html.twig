@@ -13,11 +13,15 @@
                         <div class="image1"><img src=" {{ ad.image }}" alt="imgTrack"></div></br>
                         <div class="ligne"><p><strong> Genre : </strong>{{ ad.genre }} </p></div>
 
-                         <div class="ligne"><p class=""><strong> Durée : </strong>
+                         <div class="ligne"><p><strong> Durée : </strong>
                         {{ ad.duree| date('H:i') }} </p></div>
 
-                        <p><strong> Année de sortie: </strong>{{ ad.annee }} </p>
-                        <p><strong> Prix : </strong>{{ ad.price }} Euros </p>
+                        <div class="ligne"><p><strong> Année de sortie: </strong>{{ ad.annee }} </p></div>
+                        <div class="ligne"><p><strong> Prix : </strong>{{ ad.price }} Euros </p></div>
+                        <div class="ligne"><p><strong> Posté par : </strong> 
+                         {% set a = ad.author %}
+                        <a href="{{ path('user_show' , {'slug': a.slug } ) }}">{{ad.author.firstName}} Euros </p></div></a>
+                      
 
                      <div class="bttt">
                         <a href="{{ path('tr-show', {'id':ad.id}) }} "
