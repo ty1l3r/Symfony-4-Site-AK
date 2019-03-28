@@ -48,7 +48,7 @@ class AppFixtures extends Fixture
           $user->setFirstName($faker->firstname($genre))
              ->setLastName($faker->lastname)
              ->setEmail($faker->email)
-             ->setIntroduction($faker->realText($maxNbChars = 250, $indexSize = 2))
+             ->setIntroduction($faker->realText($maxNbChars = 500, $indexSize = 2))
              ->setHash($hash)
              ->setPicture($picture);
 
@@ -59,8 +59,8 @@ class AppFixtures extends Fixture
         //nous gérons les annonces
         for ($i = 1; $i <= 20; $i++) {
         $ad = new Ad();
-        $width=150;
-        $height=150;
+        $width=200;
+        $height=200;
 
         $title = $faker->sentence($nbWords = 1);
         $image = $faker->imageUrl($width,$height,'nightlife');

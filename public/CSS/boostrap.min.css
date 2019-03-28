@@ -73,30 +73,46 @@ section {
 
 body {
     margin: 0;
-   
-    font-size: 0.875rem;
+
+    font-size: 12px;
     font-weight: 400;
     line-height: 1.5;
-    color: #888;
+    color: #e7e1e1;
     text-align: left;
     background-color: #060606
+    
 }
-.p2{
-padding-left: 1px;
-margin-bottom: -2px;
-margin-top: 14px;
+
+.image1{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align :center;
+
 }
-.p3{
+.ligne{
+    font-size: 12px;
+}
+
+.p2 {
+    padding-left: 1px;
+    margin-bottom: -2px;
+    margin-top: 14px;
+}
+
+.p3 {
     text-align: -moz-center;
     margin: 12px 40px 4px 40px;
 }
+
 [tabindex="-1"]:focus {
     outline: 0 !important
 }
-.rounded-circle1{
+
+.rounded-circle1 {
     border-radius: 50%;
     height: 66px !important;
- 
+
 }
 
 hr {
@@ -110,10 +126,14 @@ h1,
 h2,
 h3,
 h4,
-h5,
 h6 {
     margin-top: 0;
     margin-bottom: 0.5rem
+
+}
+
+h5{
+   
 }
 
 p {
@@ -166,7 +186,8 @@ blockquote {
 
 b,
 strong {
-    font-weight: bolder
+    font-weight: bolder;
+    font-size: smaller;
 }
 
 small {
@@ -476,10 +497,10 @@ h6,
 }
 
 hr {
-    margin-top: 1rem;
+    
     margin-bottom: 1rem;
     border: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1)
+    border-top: 1px solid rgba(249, 249, 249, 0.1)
 }
 
 small,
@@ -5331,6 +5352,23 @@ input[type="button"].btn-block {
     border-bottom-right-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem
 }
+.p6{
+    font-size: 15px;
+}
+.strong{
+    font-size: 15px;
+}
+.stitle{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 90%;
+    max-height: 20px;
+    white-space: nowrap;
+}
+
+.p5{
+    font-size: 15px;
+}
 
 .card-body {
     -webkit-box-flex: 1;
@@ -5340,7 +5378,8 @@ input[type="button"].btn-block {
 }
 
 .card-title {
-    margin-bottom: 0.75rem
+    margin-bottom: 0.75rem;
+    padding-left: 6px;
 }
 
 .card-subtitle {
@@ -5747,6 +5786,22 @@ a.badge:focus {
     padding-right: 0.6em;
     padding-left: 0.6em;
     border-radius: 10rem
+}
+
+.text-center1 {
+    text-align: center !important;
+    margin-right: -12px;
+    margin-top: 1px;
+}
+
+.hrr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top-color: currentcolor;
+    border-top-style: none;
+    border-top-width: 0px;
+    border-top: 1px solid #746d6d66;
 }
 
 .badge-primary {
@@ -9244,7 +9299,8 @@ button.bg-dark:focus {
 
 .mb-3,
 .my-3 {
-    margin-bottom: 1rem !important
+    margin-bottom: 1rem !important;
+    padding-bottom: 0px;
 }
 
 .ml-3,
@@ -11961,7 +12017,8 @@ legend {
 .list-group-item h4,
 .list-group-item h5,
 .list-group-item h6 {
-    color: inherit
+    color: inherit;
+    font-size: 15px;
 }
 
 .popover-title {

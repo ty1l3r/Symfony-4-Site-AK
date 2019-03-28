@@ -12,11 +12,11 @@ h1 {
 
 p {
     font-family: Coda Caption;
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-variant: normal;
     font-weight: 400;
-    line-height: 23px;
+    line-height: 14px;
 }
 
 .row-section {
@@ -50,6 +50,14 @@ p {
 
 .row-section h2 a {
     color: #d2abce;
+}
+.bttt{
+    width: 100%;
+    text-align: center;
+    display: inline-flex;
+}
+.row1{
+    display: ruby-base-container;
 }
 
 .row-section .row-block {

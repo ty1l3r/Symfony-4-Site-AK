@@ -1,0 +1,35 @@
+
+
+    
+        <div class="col-md-3 float-left">
+            <div class="card border-secondary mb-3 ">
+                <div class="card-body mb-3">
+
+                    <div><p class="stitle">{{ ad.title}}</p></div>
+                    <hr>
+
+                    <div class="card-text">
+
+                        <div class="image1"><img src=" {{ ad.image }}" alt="imgTrack"></div></br>
+                        <div class="ligne"><p><strong> Genre : </strong>{{ ad.genre }} </p></div>
+
+                         <div class="ligne"><p class=""><strong> Durée : </strong>
+                        {{ ad.duree| date('H:i') }} </p></div>
+
+                        <p><strong> Année de sortie: </strong>{{ ad.annee }} </p>
+                        <p><strong> Prix : </strong>{{ ad.price }} Euros </p>
+
+                     <div class="bttt">
+                        <a href="{{ path('tr-show', {'id':ad.id}) }} "
+                            class="btn btn-success mr-1"><small>Ecouter</small> </a>
+                        <a href="{{ path('tr-edit', {'id':ad.id}) }} "
+                            class="btn btn-warning mr-1"><small>Editer</small> </a>
+                        <a href=" {{ path('tr-del', {'id': ad.id}) }} " class="btn btn-danger mr-1">
+                            <small>Delete</small> </a>
+                    </div>   
+
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
