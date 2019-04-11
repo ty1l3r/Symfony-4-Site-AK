@@ -27,7 +27,7 @@ class Ad
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
      * min = 2,
-     * max = 30,
+     * max = 100,
      * minMessage = " Title must be at least {{ limit }} characters long",
      * maxMessage = "Your first name cannot be longer than {{ limit }} characters")
      */

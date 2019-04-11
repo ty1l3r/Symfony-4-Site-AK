@@ -30,7 +30,7 @@ class AppFixtures extends Fixture
         $users = [];
         $genres = ['male','female'];
 
-        for ($i = 1; $i <= 10; $i++) 
+        for ($i = 1; $i <= 30; $i++) 
         {
           $user = new User();
 
@@ -57,7 +57,7 @@ class AppFixtures extends Fixture
         }
 
         //nous gérons les annonces
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
         $ad = new Ad();
         $width=200;
         $height=200;
