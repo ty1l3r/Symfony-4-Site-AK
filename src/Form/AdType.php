@@ -10,6 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class AdType extends ApplicationType
@@ -25,12 +26,27 @@ class AdType extends ApplicationType
         $builder
             ->add('title', TextType::class, $this-> getConfiguration("Track", "Nom de la nouvelle Track"))
             ->add('price', MoneyType::class, $this-> getConfiguration("Prix", "indiquez le prix de la track")) 
-            ->add('genre', TextType::class, $this-> getConfiguration("Genre", "Indie, Electro, Hip-Hop ..."))
+
+            ->add('genre', ChoiceType::class, [
+                'placeholder' => 'Choose an option',
+                'choices'  => [
+                    'Hip-Hop' => 'Hip-Hop',
+                    'Indie Music' => 'Indie Music',
+                    'Techno' => 'Techno',
+                    'Minimal' => 'Minimal',
+                    'Jazz afro-cubain' => 'Jazz afro-cubain' ,
+                    'Electro' => 'Electro',
+                    'OST - Original Soundtrack' => 'Original Soundtrack',
+                    'Expérimentale' => 'Expérimentale' ,
+                ], 
+            ])
+
             ->add('duree')
             ->add('annee', IntegerType::class, $this-> getConfiguration("Année", "Année de sortie"))
             //->add('tduree')
             ->add('image', UrlType::class, $this-> getConfiguration("Image", "Entrez l'URL de l'image"))
             //->add('slug')
+            
         ;
     }
 

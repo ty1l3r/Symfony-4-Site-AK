@@ -13,12 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\User\User;
 
-
 class AdController extends AbstractController 
 {
-
-
-
     /**
      * @Route("/", name="homepage")
      */
@@ -36,8 +32,6 @@ class AdController extends AbstractController
     ); 
     }
 
-     /**========================================================== */
-
     /**
      * @Route("/tracklist", name="ad")
      */
@@ -50,8 +44,6 @@ class AdController extends AbstractController
             'ads' => $ads
         ]);
     }
-
-    /**========================================================== */
 
     /**
      * Création d'une annonce
@@ -74,11 +66,13 @@ class AdController extends AbstractController
 
         $form->HandleRequest($request);
 
-
-/** ------------EO message d'alerte -------- */
-
         if($form->isSubmitted() && $form->isValid())
+        
         {
+       
+
+            $ad->setAuthor($this->getUser());
+        
             $manager->persist($ad);
             $manager->flush();
 
@@ -91,8 +85,6 @@ class AdController extends AbstractController
                 'id' => $ad->getId()
             ]);
         }
-    /** ----------------------------------- */      
-       
 
         return $this->render('ad/new.html.twig', [
             'form' => $form->createView()

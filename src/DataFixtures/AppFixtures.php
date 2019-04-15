@@ -73,7 +73,6 @@ class AppFixtures extends Fixture
             ->setPrice(mt_rand(0.99,1.99))
             ->setGenre($genre)
             ->setDuree($duree)
-            ->setTduree(mt_rand(00.30,5.55))
             ->setAnnee(mt_rand (2007,2019))
             ->setImage($image)
             ->setAuthor($user);

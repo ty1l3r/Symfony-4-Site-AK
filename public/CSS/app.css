@@ -10,6 +10,14 @@ strong {
     font-size: 14px;
     line-height: 18px;
 }
+.titleShort{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    max-height: 40px;
+    white-space: nowrap;
+
+}
 h1 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 24px;
@@ -36,6 +44,21 @@ p {
     line-height: 12px;
 }
 
+.rounded-circle2 {
+    border-radius: 50% !important;
+    max-height: 35px; 
+    max-width: 35px;
+}
+.rounded-circle3 {
+    border-radius: 50% !important;
+    max-height: 100px; 
+    max-width: 100px;
+}
+.rounded-circle4 {
+    border-radius: 50% !important;
+    max-height: 120px; 
+    max-width: 120px;
+}
 .row-section {
     float: left;
     width: 100%;
@@ -189,18 +212,41 @@ text-align: justify;
 text-justify: inter-word;
 Line-Height: 14pt;
 }
+
+.p4 {
+    padding-left: 0;
+}
 hr {
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
     height: 0;
     overflow: visible
 }
- 
+.maxheight{
+    max-width: 230px;
+    max-height: 230px;
+}
 .img-responsive {
-    max-width: 100%;
+   
     /*
     pour la qualite de l'image (a verifier...)
     */
+  
     -ms-interpolation-mode: bicubic;
     image-rendering: optimizeQuality;
 }
+.rowShow{
+    text-align: center;
+}
+.avatar {
+    max-width: 200px;
+    max-height: 200px;
+}
+/*@media (max-width: 991px) {
+    .rowShow {
+        display: inline-grid;
+      
+    }
+
+} */
+/* LECTEUR AUDIO  */

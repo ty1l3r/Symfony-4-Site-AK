@@ -6,26 +6,47 @@
 
 <div class="container mt-3 mb-3">
  <div class="card border-secondary pt-4 pb-1">
-    <div class="row ">
-        <div class="col-2 text-center1 pr-1 ">
-            <img src="{{user.picture}}" class="avatar mb-3" alt="avatar de {{user.firstname}} . {{user.lastName}}">
-            <br>
-            <span class="badge badge-primary">{{ user.ads  | length }} posts </span>
-        </div>
-        <div class="col-10 pr-5">
+    <div class="row ml-3 ">
+            <div class="col-2 text-center1 pr-1 border-right ">
+                <img src="{{user.picture}}" class="rounded-circle4 img-responsive" alt="avatar de {{user.firstname}} . {{user.lastName}}">
+
+
+<!-- app.user = utilisateur actuellement connecté --> 
+    {% if user is same as(app.user) %}
+
+ 
+
+        <div class="mt-3">
+            <a href="{{ path('account_profile') }}" class="badge badge-primary mb-0">Edit Profil</a>
+        </div>                           <!--  EO --> 
+
+<!-- Modification de mot de passe --> 
+           <div class="mt-0">
+            <a href="{{ path('account_password') }}" class="badge badge-primary mr-2 mb-2">New Password</a>
+        </div>           <!--  EO --> 
+
+
+    {% endif %}
+
+                <br>
+          
+            </div>
+        <div class="col-10 pr-8  ">
             <h1>{{user.firstname}} {{user.lastName}}</h1>
+
+                <div class="mt-0 mb-0">
+                <span class="badge badge-primary mb-4">{{ user.ads  | length }} posts </span>
+                </div>
 
             <hr class="hrr">
 
               {{user.introduction  | raw }}
 
-              <hr class="hrr">
+              <hr class="hrr mb-2 pb-2">
 
               <h5>Contributions de {{user.firstName}}</h5> 
 
             {% if user.ads | length >0 %}
-
-
                     {% for ad in user.ads %}    
        </div>       
     </div>
@@ -34,20 +55,20 @@
 <!-- ======================  -->    
 
 <div class="container mt-3 mb-3 "> 
- <div class="row10">
+ 
 {% include  'ad/_ad.html.twig' %}
-</div>
+
  </div> 
- 
+
+{% endfor %}
+
 <!-- ======================  -->
-                    {% endfor %}
+                 
+    {% else %}
+        <div class="alert alert-dismissible alert-info pt-4 pb-2 mr-3">
+            <p class="p4"><strong>{{user.firstname}} {{user.lastName}} n'as pas encore participé </strong></p>
+        </div>
+    {% endif %}
 
-            {% else %}
-                <div class="alert alert-warning">
-                    <p><strong>{{user.firstname}} {{user.lastName}} n'as pas encore posté de Track </strong></p>
-                </div>
-            {% endif %}
-            
- 
-
-{% endblock %}
+          
+{% endblock %} 

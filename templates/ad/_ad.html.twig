@@ -1,6 +1,7 @@
+
 <div class="col-md-4 float-left">
     <div class="card mb-3 pb-0">
-        <h1 class="card-body ml-1 pt-2 pb-2" style="font-size: 20px; color: #71c2e2"> {{ ad.title}} </h1>
+        <h1 class="card-body ml-1 pt-2 pb-2 titleShort" style="font-size: 20px; color: #71c2e2"> {{ ad.title}} </h1>
 
         <div class=""><img style="height: 230px; width: 230px" src="{{ ad.image }}" alt="Card image"
                 class="img-responsive center-block ml-4"></div>
@@ -22,11 +23,16 @@
             <h6 class="card-title pb-0">Posté par : <a
                     href="{{ path('user_show' , {'slug': a.slug } ) }}">{{ad.author.firstName}} </a></h6>
         </div>
-        <div class="card-footer text-muted pt-3 pb-3 text-center ml-0 mr-0">
+        <div class="card-footer text-muted pt-3 pb-3 ml-0 mr-0 ">
+            <div class="text-center mr-0 ml-0">
             <!-- BOUTONS EDIT / DELETE / VIEW -->
+            <div class="rowShow">
+                
             <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-success mr-1">Ecouter</a>
             <a href="{{ path('tr-edit', {'id':ad.id}) }} " class="btn btn-warning mr-1">Editer</a>
             <a href=" {{ path('tr-del', {'id': ad.id}) }} " class="btn btn-danger mr-1">Delete</a>
+           </div>
+            </div>
             <!-- EO BTN -->
 
         </div>

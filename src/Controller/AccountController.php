@@ -18,12 +18,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-
-
-
 class AccountController extends AbstractController
 {   
-
 
     /**
      * Permet d'afficher  et de gérer le form de connection
@@ -43,14 +39,13 @@ class AccountController extends AbstractController
             'username' => $username
         ]);
     }
- 
+
     /**
      * Permet de se deconnecter
-     *
      * @Route("/logout", name="account_logout")
-     * 
      * @return void
      */
+
     public function logout()
     {
         //rien !
@@ -84,17 +79,15 @@ class AccountController extends AbstractController
             $this->addFlash(
                 'success',
                 "           Votre compte a bien été enregistré. Vous pouvez maintenant vous connecter !");
-
             return $this->redirectToRoute('account_login');
         }
     /**--------------------------------------------------------------- */
         return $this->render('account/registration.html.twig', [
             'form' => $form->createView()
-        ]);
-        
+        ]);    
     }
 
-        /**
+    /**
      *@Route ("/fanzone", name="fan")
      *
      */
@@ -108,7 +101,6 @@ class AccountController extends AbstractController
     return $this->render('ad/user-page.html.twig', [
            'ads' => $ads
        ]);
-
    }
 
    /**
@@ -135,7 +127,6 @@ class AccountController extends AbstractController
                "Les données du profil ont été enregistrée avec succès."
            );
        }
-
         return $this->render('account/profile.html.twig', [
             'form' => $form->createView()
         ]);
@@ -175,17 +166,23 @@ class AccountController extends AbstractController
                 );
 
                 return $this->redirectToRoute('/homepage');
-            }
-            
+            }         
         }
-
-
 
         return $this->render('account/password.html.twig', [
             'form' => $form->createView()
         ]);
     }
 
-   
+    /**
+     * Permet d'afficher le profil de l'utilisateur connecté
+     * @Route("/account", name="account_index")
+     * @return Response
+     */
+    public function myAccount(){
+        return $this->render('user_constroller/index.html.twig', [
+                'user' => $this->getUser()
+        ]);
+    }
 
 }

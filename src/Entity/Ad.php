@@ -65,10 +65,6 @@ class Ad
 
     private $annee;
 
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $tduree;
 
     /**
      * @ORM\Column(type="string", length=500)
@@ -103,6 +99,9 @@ class Ad
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
+
+   
+  
 
    
     
@@ -172,17 +171,7 @@ class Ad
         return $this;
     }
 
-    public function getTduree(): ?float
-    {
-        return $this->tduree;
-    }
-
-    public function setTduree(float $tduree): self
-    {
-        $this->tduree = $tduree;
-
-        return $this;
-    }
+    
 
     public function getImage(): ?string
     {
@@ -219,6 +208,8 @@ class Ad
 
         return $this;
     }
+
+ 
 
   
    

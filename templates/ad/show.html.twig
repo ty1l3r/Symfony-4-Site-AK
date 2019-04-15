@@ -21,24 +21,32 @@
                     
                     <hr>
                     <div class="card-text">
-                        <img class="float-left mr-3" src=" {{ ad.image }}" alt="imgTrack">
+                        <img class="float-left mr-3 maxheight" src=" {{ ad.image }}" alt="imgTrack">
                         <p><strong> Genre : </strong>{{ ad.genre }} </p>
                         <p><strong> Durée : </strong>{{ ad.duree| date('H:i') }} </p>
                         <p><strong> Année de sortie: </strong>{{ ad.annee }} </p>
                         <p><strong> Prix : </strong>{{ ad.price }} Euros </p>
                         <br />
-                    
-                        <audio controls
-                            data-info-album-art="http://farm5.staticflickr.com/4050/4353986539_ec89b52698_d.jpg"
-                            data-info-album-title="8874" data-info-artist="Billy Murray"
-                            data-info-title="Come, take a trip in my air-ship"
-                            data-info-label="Edison Gold Moulded Record" data-info-year="1905"
-                            data-info-att="University of California, Santa Barbara Library."
-                            data-info-att-link="http://cylinders.library.ucsb.edu/search.php?query=8874">
-                            <source src="/bootstrap-player/media/cusb-cyl2985d.ogg" type="audio/ogg" />
-                            <source src="//Users/hakha/Desktop/01 - Greenland.mp3" type="audio/mpeg" />
-                            <a href="/bootstrap-player/media/cusb-cyl2985d.mp3">cusb_cyl2985d</a>
-                        </audio>
+               <!-- LECTEUR AUDIO -->      
+
+<div class="audio  js-audio">  
+    <audio class="audio__src  js-audio__src" src="https://goo.gl/TNkeEq" preload controls></audio>  
+    <button class="audio__icon  audio__icon--play  js-audio__play"></button>   
+    <progress class="audio__bar  js-audio__progress" value="0" max="100"></progress>    
+    <time class="audio__time">       
+        <span class="js-audio__time">0:00</span> / <span class="js-audio__endtime">0:00</span>   
+    </time>   
+    <button class="audio__icon  audio__icon--loop  js-audio__loop"></button>  
+    <button class="audio__icon  audio__icon--vol  audio__icon--vol-hi  js-audio__mute"></button>   
+    <div class="audio__vol-pop">       
+        <progress class="audio__vol  js-audio__vol" value="1" max="1"></progress>       
+    </div>  
+    <a class="audio__icon  audio__icon--download" href="https://goo.gl/TNkeEq" download></a>
+</div>
+
+
+
+              
                         <a href="" class="btn btn-success float-right">Acheter</a>
                     </div>
                 </div>
@@ -59,12 +67,12 @@
 
 			<div class="media-left align-self-center">
 
-				
-                <img class="rounded-circle1" src=" {{ ad.author.picture }}"
-                alt="avatar de {{ad.author.firstName}}">
+				<a href="{{path('user_show', {'slug': a.slug})}}">
+                <img class="rounded-circle3 mb-3 ml-2" src=" {{ ad.author.picture  }}"
+                alt="avatar de {{ad.author.firstName}}"></a>
+               
                 <a href=" {{ path('user_show' , {'slug': a.slug } ) }} "> <p class="p2">{{ad.author.firstName}}  </a> a posté 
                 {{ ad.author.ads | length}} tracks</p>
-               
 
 			</div>
 			<div class="media-body">
