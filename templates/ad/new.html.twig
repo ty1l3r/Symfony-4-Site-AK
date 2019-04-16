@@ -6,7 +6,17 @@
 {% block body %}
 
 <div class="container mt-3">
-    <h1> Créer une nouvelle entrée </h1>
+
+<!-- FAIRE UN IF  -->
+
+{% if editMode %}
+    <h1>Modification de la Track</h1>
+{% else %}
+    <h1> Poster une nouvelle Track </h1>
+{% endif %}
+
+<!-- ======================= -->
+
 <br>
     {{ form_start(form) }}
 

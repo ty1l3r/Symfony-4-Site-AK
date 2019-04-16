@@ -87,7 +87,9 @@ class AdController extends AbstractController
         }
 
         return $this->render('ad/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            /* EDIT MODE POUR CHANGER LE TEXTE DE LA PAGE */
+            'editMode' => $ad->getId() !== null
         ]);
     }
      /**========================================================== */
