@@ -27,31 +27,46 @@
                         <p><strong> Durée : </strong>{{ ad.duree| date('H:i') }} </p>
                         <p><strong> Année de sortie: </strong>{{ ad.annee }} </p>
                         <p><strong> Prix : </strong>{{ ad.price }} Euros </p>
+
+                        <a href="" class="btn btn-success mt-5">Acheter</a>
                         <br />
-               <!-- LECTEUR AUDIO -->      
+   </div>                      
+<!-- LECTEUR AUDIO -->      
+<div class="container">
+<section class="wrapper pt-4">
 
-<div class="audio  js-audio">  
-    <audio class="audio__src  js-audio__src" src="https://goo.gl/TNkeEq" preload controls></audio>  
-    <button class="audio__icon  audio__icon--play  js-audio__play"></button>   
-    <progress class="audio__bar  js-audio__progress" value="0" max="100"></progress>    
-    <time class="audio__time">       
-        <span class="js-audio__time">0:00</span> / <span class="js-audio__endtime">0:00</span>   
-    </time>   
-    <button class="audio__icon  audio__icon--loop  js-audio__loop"></button>  
-    <button class="audio__icon  audio__icon--vol  audio__icon--vol-hi  js-audio__mute"></button>   
-    <div class="audio__vol-pop">       
-        <progress class="audio__vol  js-audio__vol" value="1" max="1"></progress>       
-    </div>  
-    <a class="audio__icon  audio__icon--download" href="https://goo.gl/TNkeEq" download></a>
+	<article class="music-container">
+
+		<div class="controls">
+			<input type="radio" name="controls" id="btn-play">
+			<label for="btn-play" class="lbl-btn-play"><span></span></label>
+
+			<input type="radio" name="controls" id="btn-pause">
+			<label for="btn-pause" class="lbl-btn-pause"><span></span></label>
+
+			<label class="lbl-btn-reset"><span></span></label>
+		</div>
+
+		<div class="cover">
+			<div class="static-card">
+				<img src="http://f1.bcbits.com/img/a1312167393_16.jpg" alt="">
+			</div>
+			<div class="flip-card">
+				<img src="http://f1.bcbits.com/img/a1312167393_16.jpg" alt="">
+			</div>
+		</div>
+	</article>
+
+	<p class="info">Hover/Click on album cover to show controls</p>
+
+</section>
 </div>
-
       
-                        <a href="" class="btn btn-success float-right">Acheter</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+   
 </div>
 
 <div class="container">
@@ -82,13 +97,10 @@
 			<div class="media-right align-self-center">
 				<a href="#" class="btn btn-default">Contact Now</a>
 			</div>
-
 		</div>
-
                 </div>
             </div>
         </div>
     </div>
- 
 </div>
 {% endblock %}

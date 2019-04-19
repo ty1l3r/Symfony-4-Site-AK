@@ -1,0 +1,17 @@
+
+
+V 1.1.1 
+
+Prochaine version : V 1.2.0
+
+Correction des bugs :
+
+Optimisation de la page Base, 
+Intégration d'un Footer, 
+Changement de typo
+Modification de l'affichage des annonces
+
+
+
+- refonte HTML/CSS
+- Refonte de la BDD (Ajout téléchargement de musique)
