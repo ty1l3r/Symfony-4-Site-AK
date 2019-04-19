@@ -13,15 +13,16 @@
         <div class="col order-2">
             <div class="card border-secondary mb-2 ">
                 <div class="card-body">
-                    <h4 class="card-title">Track : {{ ad.title}} </h4>
+                    <h4 class="card-title">{{ ad.title}} </h4>
 
-
-                        <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-danger float-right mt-3 ml-1">Delete</a>
+                {% if app.user and app.user is same as(ad.author) %}
+                        <a href="  {{ path('tr-del', {'id': ad.id}) }} " class="btn btn-danger float-right mt-3 ml-1"
+                        onclick= "return confirm('Confirmez la suppression de la track: {{ad.title}}?')" >Delete</a>
                         <a href="{{ path('tr-edit', {'id':ad.id}) }} " class="btn btn-warning float-right mt-3">Editer</a>
-                    
+                {% endif %}   
                     <hr>
                     <div class="card-text">
-                        <img class="float-left mr-3 maxheight" src=" {{ ad.image }}" alt="imgTrack">
+                        <img class="float-left mr-3 maxheight" style="height: 230px; width: 230px" src=" {{ ad.image }}" alt="imgTrack">
                         <p><strong> Genre : </strong>{{ ad.genre }} </p>
                         <p><strong> Durée : </strong>{{ ad.duree| date('H:i') }} </p>
                         <p><strong> Année de sortie: </strong>{{ ad.annee }} </p>
@@ -44,9 +45,7 @@
     <a class="audio__icon  audio__icon--download" href="https://goo.gl/TNkeEq" download></a>
 </div>
 
-
-
-              
+      
                         <a href="" class="btn btn-success float-right">Acheter</a>
                     </div>
                 </div>

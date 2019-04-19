@@ -31,6 +31,7 @@ security:
                 path: account_logout
                 target: account_login
 
+
     # =====================================
 
             # activate different ways to authenticate

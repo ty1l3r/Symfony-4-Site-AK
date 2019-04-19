@@ -29,8 +29,10 @@
             <div class="rowShow">
                 
             <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-success mr-1">Ecouter</a>
+             {% if app.user and app.user is same as(ad.author) %}
             <a href="{{ path('tr-edit', {'id':ad.id}) }} " class="btn btn-warning mr-1">Editer</a>
             <a href=" {{ path('tr-del', {'id': ad.id}) }} " class="btn btn-danger mr-1">Delete</a>
+            {% endif %}
            </div>
             </div>
             <!-- EO BTN -->

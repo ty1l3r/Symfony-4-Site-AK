@@ -4,11 +4,12 @@ namespace App\DataFixtures;
 
 use App\Entity\Ad;
 use Faker\Factory;
+use App\Entity\Role;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 class AppFixtures extends Fixture
@@ -25,12 +26,30 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {   
         $faker = Factory::create('FR-fr');
+
+        // mode Admin
+        $adminRole = new Role();
+        $adminRole->setTitle('ROLE_ADMIN');
+        $manager->persist($adminRole);
+
+        $adminUser = new User();
+        $adminUser->setFirstName('Fabien')
+                  ->setLastName('Coll')
+                  ->setEmail('h4kh4@outlook.fr')
+                  ->setHash($this->encoder->encodePassword($adminUser, 'password'))
+                  ->setPicture('https://randomuser.me/api/portraits/men/86.jpg')
+                  ->setIntroduction($faker->realText($maxNbChars = 250, $indexSize = 2))
+                  ->addUserRole($adminRole);
+
+        $manager->persist($adminUser);
+
+
         //nous gérons les utilisateurs
 
         $users = [];
         $genres = ['male','female'];
 
-        for ($i = 1; $i <= 30; $i++) 
+        for ($i = 1; $i <= 10; $i++) 
         {
           $user = new User();
 
@@ -48,7 +67,7 @@ class AppFixtures extends Fixture
           $user->setFirstName($faker->firstname($genre))
              ->setLastName($faker->lastname)
              ->setEmail($faker->email)
-             ->setIntroduction($faker->realText($maxNbChars = 500, $indexSize = 2))
+             ->setIntroduction($faker->realText($maxNbChars = 250, $indexSize = 2))
              ->setHash($hash)
              ->setPicture($picture);
 
@@ -57,7 +76,7 @@ class AppFixtures extends Fixture
         }
 
         //nous gérons les annonces
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
         $ad = new Ad();
         $width=200;
         $height=200;
