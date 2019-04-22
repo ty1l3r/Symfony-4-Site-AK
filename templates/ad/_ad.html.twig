@@ -1,47 +1,54 @@
 
-<div class="container">
-    <div class="col-md-4 float-left">
-        <div class="card mb-3 pb-0">
 
 
-            <h1 class="card-body ml-1 pt-2 pb-2 titleShort" style= "font-size: 30px; color: #71c2e">
-            <a class="atitre" href="{{ path('tr-show', {'id':ad.id}) }} "> {{ ad.title}} </a></h1>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mt-3">
+            <div class="card">
+                <div class="card-horizontal">
+                    <div class="img-square-wrapper">
+                    <img style="height: 230px; width: 230px" src="{{ ad.image }}" alt="Card image"
+                    class="img-responsive center-block mt-3 ml-3">
+               
+                    </div>
+                
 
-            <div class=""><img style="height: 230px; width: 230px" src="{{ ad.image }}" alt="Card image"
-                    class="img-responsive center-block ml-4"></div>
+                    <div class="card-body">
+                        <h1 class="titleShort mb-1" style= "font-size: 30px; color: #71c2e">
+                    <a class="atitre pb-1" href="{{ path('tr-show', {'id':ad.id}) }} "> {{ ad.title}} </a></h1>
 
-            <div class="card-body  pt-4 pb-0">
-                <h6 class="card-title"><strong>Genre :</strong> {{ ad.genre }} </h6>
-                <h6 class="card-title"><strong>Durée : </strong> {{ ad.duree| date('H:i') }} </h6>
-                <h6 class="card-title"><strong>Prix : </strong>{{ ad.price }} Euros </h6>
-            </div>
-            <hr class="pt-0 pb-0">
-            <div class="card-body pt-0 pb-0">
-                <p class="card-text ml-1 mt-0 mb-0 strong1"> <strong>Infos : </strong>
-                    Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-            </div>
-            <hr class="pt-0 pb-0">
-            <div class="card-body pt-0 pb-0">
-                {% set a = ad.author %}
-                <h6 class="card-title pb-0">Posté par : <a
+    <hr class="hr4">
+                         {% set a = ad.author %}
+                        <h6 class="card-title pb-0 ">Posté par : <a
                         href="{{ path('user_show' , {'slug': a.slug } ) }}">{{ad.author.firstName}} </a></h6>
-            </div>
-            <div class="card-footer text-muted pt-3 pb-3 ml-0 mr-0 ">
-                <div class="text-center mr-0 ml-0">
-                <!-- BOUTONS EDIT / DELETE / VIEW -->
-                <div class="rowShow">
-                    
-                <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-success mr-1">Ecouter</a>
-                {% if app.user and app.user is same as(ad.author) %}
-                <a href="{{ path('tr-edit', {'id':ad.id}) }} " class="btn btn-warning mr-1">Editer</a>
-                <a href=" {{ path('tr-del', {'id': ad.id}) }} " class="btn btn-danger mr-1">Delete</a>
-                {% endif %}
-            </div>
-                </div>
-                <!-- EO BTN -->
 
+                    <h6 class="card-title"><strong>Genre :</strong> {{ ad.genre }} </h6>
+                    <h6 class="card-title"><strong>Durée : </strong> {{ ad.duree| date('H:i') }} </h6>
+                    <h6 class="card-title"><strong>Prix : </strong>{{ ad.price }} Euros </h6>
+    <hr class="hr4">
+
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                        </p>
+
+
+                    </div>
+                </div>
+
+
+                <div class="card-footer">
+                    <div class="float-right">
+                    <small class="text-muted"> <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-success mr-1">Ecouter</a>
+                        {% if app.user and app.user is same as(ad.author) %}
+                        <a href="{{ path('tr-edit', {'id':ad.id}) }} " class="btn btn-warning mr-1">Editer</a>
+                        <a href=" {{ path('tr-del', {'id': ad.id}) }} " class="btn btn-danger mr-1">Delete</a>
+                        {% endif %}
+                        </div>
+   
+                </div>
             </div>
         </div>
     </div>

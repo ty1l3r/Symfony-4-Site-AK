@@ -32,8 +32,8 @@ strong {
     border-bottom: solid white 5px;
 }
 .atitre{
-    font-size: 19px;
-    color: #aaa;
+    font-size: 25px;
+    float: left
 }
 h1 {
     font-family: Arial, Helvetica, sans-serif;
@@ -263,6 +263,16 @@ Line-Height: 14pt;
     color: white;
     background-color: beige;
 }
+.hr4{
+ 
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0.2px;
+  overflow: visible;
+  color: white;
+  background-color: beige;
+}
+
 .maxheight{
     max-width: 230px;
     max-height: 230px;
@@ -296,7 +306,7 @@ Line-Height: 14pt;
         color: grey;
  }
  footer p, a {
-font-size: 12px;
+font-size: 17px;
 font-family: 'Roboto', sans-serif;
 }
 footer h6 {
@@ -543,3 +553,9 @@ html {
     margin-top: 70px;
   }
   
+  /* ROW ARTICLESS */
+
+  .card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}

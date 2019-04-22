@@ -22,7 +22,7 @@
                 {% endif %}   
                     <hr>
                     <div class="card-text">
-                        <img class="float-left mr-3 maxheight" style="height: 230px; width: 230px" src=" {{ ad.image }}" alt="imgTrack">
+                        <">
                         <p><strong> Genre : </strong>{{ ad.genre }} </p>
                         <p><strong> Durée : </strong>{{ ad.duree| date('H:i') }} </p>
                         <p><strong> Année de sortie: </strong>{{ ad.annee }} </p>
@@ -30,37 +30,16 @@
 
                         <a href="" class="btn btn-success mt-5">Acheter</a>
                         <br />
-   </div>                      
-<!-- LECTEUR AUDIO -->      
-<div class="container">
-<section class="wrapper pt-4">
+   </div>    
 
-	<article class="music-container">
 
-		<div class="controls">
-			<input type="radio" name="controls" id="btn-play">
-			<label for="btn-play" class="lbl-btn-play"><span></span></label>
+<!-- IFRAME-->      
 
-			<input type="radio" name="controls" id="btn-pause">
-			<label for="btn-pause" class="lbl-btn-pause"><span></span></label>
+<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" 
+src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/539018871&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+</iframe>
 
-			<label class="lbl-btn-reset"><span></span></label>
-		</div>
-
-		<div class="cover">
-			<div class="static-card">
-				<img src="http://f1.bcbits.com/img/a1312167393_16.jpg" alt="">
-			</div>
-			<div class="flip-card">
-				<img src="http://f1.bcbits.com/img/a1312167393_16.jpg" alt="">
-			</div>
-		</div>
-	</article>
-
-	<p class="info">Hover/Click on album cover to show controls</p>
-
-</section>
-</div>
+<!-- IFRAME-->  
       
                     </div>
                 </div>
