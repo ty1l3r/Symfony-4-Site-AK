@@ -5,28 +5,17 @@
 {% block body %}
 
     
-    <div class="container mt-2 mb-2">
-        <a href=" {{ path('tr-create')}} " class="btn btn-success ml-3 ">Ajouter</a>
-        <br />
-    </div>
-
-
-    {% for ad in ads %}
-
-    <!-- ======================  -->
 <div class="container">
-
-    {% include  'ad/_ad.html.twig' %}
-
-</div>
-    <!-- ======================  -->
-    {% endfor %}
-
-    <div class="container2 float-left"><hr class="hr3"></div>
+        <div class="row mt-4">
+        <a href=" {{ path('tr-create')}} " class="btn btn-success ml-3 ">Ajouter</a>
+        </div>
+        <br />
+      
+        {% for ad in ads %}
+             {% include  'ad/_ad.html.twig' %}
+        {% endfor %}
     
+</div>
+ 
         
-{% endblock %}
-
-{% block footer %}
-		{% include  'partials/footer.html.twig' %}
 {% endblock %}

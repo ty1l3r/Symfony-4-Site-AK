@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} ERROR 403 {% endblock %}
+
+{% block body %}
+
+<div class="container mt-4 mb-4">
+    <h1>Vous n'avez pas le droit d'acceder à cette ressource </h1>
+    <p>Alors ? on essaye de corrompre le site ? On se calme petit hacker ! Ip enregistré</p>
+     {# {{exception.message}}</p>  a utiliser avec la gestion du cache #}
+
+    <a href="{{ path('homepage')}}" class="alert alert-danger">Retour à l'accueil</a>
+
+    <a href="{{ path('ad')}}" class="alert alert-danger">nos Tracks</a>
+
+</div>
+
+{% endblock %}

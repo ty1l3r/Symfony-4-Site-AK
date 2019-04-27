@@ -1,12 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-{{ ad.title}}
-{% endblock %}
+{% block title %}{{ ad.title}}{% endblock %}
 
 {% block body %}
 
-<h1> </h1>
+{#=====  Post User ====== #}
+
+<div class="container">
+    <div class="row">
+        <div class="col order-2">
+            <div class="card border-secondary mb-3 ">
+                <div class="card-body">
+
+                    <div class="media">
+
+                        {% set a = ad.author %}
+
+                        <div class="media-left align-self-center">
+
+                            <a href="{{path('user_show', {'slug': a.slug})}}">
+                                <img class="rounded-circle3 mb-3 ml-2" src=" {{ ad.author.picture  }}"
+                                    alt="avatar de {{ad.author.firstName}}"></a>
+
+                            <a href=" {{ path('user_show' , {'slug': a.slug } ) }} ">
+                                <p class="p2">{{ad.author.firstName}}
+                            </a> a posté
+                            {{ ad.author.ads | length}} tracks</p>
+
+                        </div>
+                        <div class="media-body">
+                            <h4> </h4>
+                            <p class="p3"> </p>
+
+                        </div>
+                        <div class="media-right align-self-center">
+                            <a href="#" class="btn btn-default">Contact Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{#=====  INFO DE LA TRACK ====== #}
 
 <div class="container">
     <div class="row">
@@ -15,71 +52,106 @@
                 <div class="card-body">
                     <h4 class="card-title">{{ ad.title}} </h4>
 
-                {% if app.user and app.user is same as(ad.author) %}
-                        <a href="  {{ path('tr-del', {'id': ad.id}) }} " class="btn btn-danger float-right mt-3 ml-1"
-                        onclick= "return confirm('Confirmez la suppression de la track: {{ad.title}}?')" >Delete</a>
-                        <a href="{{ path('tr-edit', {'id':ad.id}) }} " class="btn btn-warning float-right mt-3">Editer</a>
-                {% endif %}   
+                    {% if app.user and app.user is same as(ad.author) %}
+                    <a href="  {{ path('tr-del', {'id': ad.id}) }} " class="btn btn-danger float-right mt-3 ml-1"
+                        onclick="return confirm('Confirmez la suppression de la track: {{ad.title}}?')">Delete</a>
+                    <a href="{{ path('tr-edit', {'id':ad.id}) }} " class="btn btn-warning float-right mt-3">Editer</a>
+                    {% endif %}
                     <hr>
                     <div class="card-text">
-                        <">
+
                         <p><strong> Genre : </strong>{{ ad.genre }} </p>
                         <p><strong> Durée : </strong>{{ ad.duree| date('H:i') }} </p>
                         <p><strong> Année de sortie: </strong>{{ ad.annee }} </p>
                         <p><strong> Prix : </strong>{{ ad.price }} Euros </p>
-
-                        <a href="" class="btn btn-success mt-5">Acheter</a>
-                        <br />
-   </div>    
-
-
-<!-- IFRAME-->      
-
-<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" 
-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/539018871&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
-</iframe>
-
-<!-- IFRAME-->  
-      
+        <hr>
                     </div>
+{#=====  IFRAM SOUNDCLOUD ====== #}
+
+                    <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
+                        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/539018871&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+                    </iframe>
+{#=====  EOSOUNDCLOUD ====== #}
+
+
+                    <a href="" class="btn btn-success mt-3">Acheter</a><br/>
+                   
+                 
                 </div>
-            </div>
-        </div>
-   
-</div>
 
-<div class="container">
-    <div class="row">
-        <div class="col order-2">
-            <div class="card border-secondary mb-3 ">
-                <div class="card-body">
+                     <div class="alert alert-light ">
 
-		<div class="media">
-		
-        {% set a = ad.author %}
+                        {% if app.user %}
 
-			<div class="media-left align-self-center">
+                        {% set comment = ad.commentFromAuthor(app.user) %}
 
-				<a href="{{path('user_show', {'slug': a.slug})}}">
-                <img class="rounded-circle3 mb-3 ml-2" src=" {{ ad.author.picture  }}"
-                alt="avatar de {{ad.author.firstName}}"></a>
-               
-                <a href=" {{ path('user_show' , {'slug': a.slug } ) }} "> <p class="p2">{{ad.author.firstName}}  </a> a posté 
-                {{ ad.author.ads | length}} tracks</p>
+                                {% if comment is not null %}
+                                    <blockquote>
+                                        Merci d'avoir noté cette Track
+                                    </blockquote>
+                                     
 
-			</div>
-			<div class="media-body">
-				<h4> </h4>
-				<p class="p3"> </p>
-				
-			</div>
-			<div class="media-right align-self-center">
-				<a href="#" class="btn btn-default">Contact Now</a>
-			</div>
-		</div>
+                            {% else %}
+                                <h4 class="alert-heading">Votre avis compte</h4>
+                                {{ form_start(form) }}
+                                {{ form_widget(form) }}
+                             <button type="submit" class="btn btn-success">Confirmer</button>
+                                 {{ form_end(form) }}
+                                 {% endif %}
+                          {% else %}
+                          <h2>Veuillez vous connecter ou vous inscrire pour pouvoir noter cette track</h2>
+                    {% endif %} 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+{#=====  COMMENTAIRES ====== #}
+
+<div class="container">
+  
+
+    {% if ad.comments|length >0 %}
+    <div class="bg-dark rounded py-3 px-3">
+      
+
+        <div class="alert alert-info">
+            <h4 class="alert-heading">
+                <div class="row align-items-center">
+                    <div class="col text-center ">
+                           Note globale des visiteurs <br>
+                          
+                    </div>
+                    <div class="col">
+                         
+                        {% include 'partials/rating.html.twig' with {'rating' : ad.avgRatings} %} 
+                        <small> Calculé sur {{ ad.comments | length }} note(s) </small>
+                    </div>               
+                </div>
+            </h4>
+        </div>
+    
+     <hr class="hr4">
+
+    {% for comment in ad.comments %}
+
+        <strong> {{ comment.author.firstName }} : </strong>
+        <blockquote>
+            {{ comment.content}}
+        </blockquote> Note : 
+{#=====  Boucles étoiles - Injection avec données ====== #}  
+{% include 'partials/rating.html.twig' with {'rating': comment.rating} %}
+{#====================================================== #} 
+  <hr class="hr4">
+    
+    {% endfor %}
+
+    {% else %}
+    <h3>Cette annonce n'as pas encore reçu de commentaires</h3>
+    {% endif %}
+    </div>
+</div>
+ 
 {% endblock %}

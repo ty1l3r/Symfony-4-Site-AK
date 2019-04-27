@@ -1,10 +1,23 @@
 <?php
 
+/**====================== AD CONTROLLER ================================
+ *======================================================================
+ *===============  __  __     __  __     __  __     ====================  
+ *=============== /\ \_\ \   /\ \/ /    /\ \_\ \    ==================== 
+ *=============== \ \  __ \  \ \  _"-.  \ \  __ \   ====================
+ *===============  \ \_\ \_\  \ \_\ \_\  \ \_\ \_\  ====================
+ *===============   \/_/\/_/   \/_/\/_/   \/_/\/_/  ====================
+ *======================================================================
+ *====================================================================*/
+
 namespace App\Controller;
 
 use App\Entity\Ad;
 use App\Form\AdType;
+use App\Entity\Comment;
+use App\Form\CommentType;
 use App\Repository\AdRepository;
+use App\Entity\Comment as AppComment;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,11 +27,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Booking;
 
 class AdController extends AbstractController 
 {
 
-/* ============================================================================================== */
+/* ============================== / - HOMEPAGE ================================== */
     /**
      * @Route("/", name="homepage")
      */
@@ -35,7 +49,7 @@ class AdController extends AbstractController
         ]
     ); 
     }
-/* ================================================================================ */
+/* =============================== TRACKLIST - AD ================================= */
     /**
      * @Route("/tracklist", name="ad")
      */
@@ -48,6 +62,7 @@ class AdController extends AbstractController
             'ads' => $ads
         ]);
     }
+/* ======================== TRACKLIST/NEW - TR-CREATE ============================= */
 
     /**
      * Création d'une annonce
@@ -57,7 +72,7 @@ class AdController extends AbstractController
 
     public function create(Request $request, ObjectManager $manager, Ad $ad = null)
 
-/** --------Envoi du Formulaire -------------*/
+    /** --------Envoi du Formulaire -------------*/
     {
         //$ad = new Ad();
 
@@ -72,8 +87,6 @@ class AdController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         
         {
-       
-
             $ad->setAuthor($this->getUser());
         
             $manager->persist($ad);
@@ -96,7 +109,7 @@ class AdController extends AbstractController
         ]);
     }
 
-/* ============================================================================================== */
+/* ==========================  EDITION - TR-EDIT =================================== */
 
     /**
      * Permet d'afficher le formulaire d'édition
@@ -131,34 +144,50 @@ class AdController extends AbstractController
         ]);
     }
 
-                            
+/* ==========================  SHOW - TR-SHOW =================================== */
 
-
-
-
-
-
-
-
-     /**========================================================== */
 
     /**
      * Undocumented function
      *@Route ("/tracklist/{id}", name="tr-show")
+     * @param Ad $ad
+     * @param Request $request
+     * @param ObjectManager $manager
+     * @return Response
      * 
      */
-    public function show(Ad $ad)
+    public function show(Ad $ad, Request $request, ObjectManager $manager)
 
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+   
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $comment->setAd($ad);
+            $comment->setAuthor($this->getUser());
+
+
+            $manager->persist($comment);
+            $manager->flush();
+            $this->addFlash(
+                'success',
+                "Votre commentaire a bien été pris en compte !"
+            );
+        }
         return $this->render('ad/show.html.twig', [
-         'ad' => $ad
-            
+         'ad' => $ad,
+         'form'    => $form->createView() ,
+         'id' => $ad->getId()
         ]);
     }
 
-     /**========================================================== */
+/* ==========================  DELETE - TR-DEL =================================== */
 
-        /**
+    /**
      * Permet de supprimer une annonce
      * 
      * @Route("/ads/{id}/delete", name="tr-del")

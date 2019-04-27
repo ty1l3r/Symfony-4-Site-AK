@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Entity;
-use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
 use Cocur\Slugify\Slugify;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -100,6 +103,53 @@ class Ad
      */
     private $author;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="ad", orphanRemoval=true)
+     */
+    private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="ad")
+     */
+    private $bookings;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
+    }
+
+
+    /**
+     * Permet de récupérer le commentaire d'un auteur par rapport à une annonce
+     *
+     * @param User $author
+     * @return Comment|null
+     */
+    public function getCommentFromAuthor(User $author){
+        foreach($this->comments as $comment) {
+            if($comment->getAuthor() === $author) return $comment;
+        }
+        return null;
+    }
+
+    /**
+     * Permet d'obtenir la moyenne globale des notes pour cette annonce
+     *
+     * @return float
+     */
+    
+    public function getAvgRatings(){
+        //réduit un tableau en 1 valeur.
+        $sum = array_reduce($this->comments->toArray(), function($total, $comment){
+            return $total + $comment->getRating();
+        }, 0);
+        //calculer la somme des notations et faire la division pour la moyenne
+        // attention à la division par 0 <O></O>
+        if(count($this->comments) > 0) return $sum / count($this->comments);
+
+        return 0;
+    }
 
     public function getId()
     {
@@ -200,6 +250,68 @@ class Ad
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setAd($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getAd() === $this) {
+                $comment->setAd(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Booking[]
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setAd($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->bookings->contains($booking)) {
+            $this->bookings->removeElement($booking);
+            // set the owning side to null (unless already changed)
+            if ($booking->getAd() === $this) {
+                $booking->setAd(null);
+            }
+        }
 
         return $this;
     }

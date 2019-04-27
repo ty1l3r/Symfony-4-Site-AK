@@ -10,7 +10,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+use App\Entity\Comment;
 
 class AppFixtures extends Fixture
 {
@@ -76,10 +76,10 @@ class AppFixtures extends Fixture
         }
 
         //nous gérons les annonces
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 20; $i++) {
         $ad = new Ad();
-        $width=200;
-        $height=200;
+        $width=250;
+        $height=250;
 
         $title = $faker->sentence($nbWords = 1);
         $image = $faker->imageUrl($width,$height,'nightlife');
@@ -98,6 +98,16 @@ class AppFixtures extends Fixture
           
         
         $manager->persist($ad);
+
+        //Gestion des commentaires
+        
+           $comment = new Comment();
+           $comment->setContent($faker->paragraph())
+                   ->setRating(mt_rand(1,5))
+                   ->setAuthor($users[mt_rand(0, count($users)-1)])
+                   ->setAd($ad);
+                   
+            $manager->persist($comment);
     }
         $manager->flush();
     }
