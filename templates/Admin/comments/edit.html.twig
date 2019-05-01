@@ -1,0 +1,52 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}Modification du commentaire {{comment.id}}{% endblock %}
+{% block body %}
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header pl-3 pr-3">
+                    <h4>Moderation de <strong>{{comment.author.firstName}}</Strong> de la track :
+                        <strong>{{comment.ad.slug}}</Strong></h4>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="card border-success mb-3">
+                        <div class="card-header">Commentaire d'origine posté le
+                            {{comment.createdAt | date('d/m/Y H:i')}}</div>
+                        <div class="card-body">
+                            <p class="card-text">{{comment.content}}</p>
+                        </div>
+                    </div>
+
+                    <div class="card border-success mb-3">
+                        <div class="card-header">Note</div>
+                        <div class="card-body">
+                            <p class="card-text">{% include 'partials/rating.html.twig' with {'rating': comment.rating} %}</p>
+                        </div>
+                    </div>
+
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button type="submit " class="btn btn-outline-warning">
+                        <i class="fas fa-check"></i>
+                        enregistrer les Modification.
+                    </button>
+
+                    <button class="btn btn-outline-info">
+                        <i class="fas fa-undo"></i>
+                        <a href="{{ path ('admin_comment_index') }}"> Retour </a>
+                    </button>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

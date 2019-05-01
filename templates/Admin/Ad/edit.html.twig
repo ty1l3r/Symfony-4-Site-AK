@@ -1,0 +1,99 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}Modification de l'annonce{{ad.id}}{% endblock %}
+
+{% form_theme form _self %}
+
+{% block body %}
+<div class="container mt-2">
+
+
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="col">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header pl-3 pr-3">
+                    <h4 class="mt-2"><strong class="strong2">Corriger l'annonce: </strong>{{ad.title}} ?</h4>
+                </div>
+                <div class="card-body">
+
+                
+                    {{ form_widget(form) }}
+                    <button type="submit " class="btn btn-outline-warning">
+                        <i class="fas fa-check"></i>
+                        enregistrer les Modification.
+                    </button>
+
+
+                    <button class="btn btn-outline-info">
+                        <i class="fas fa-undo"></i>
+                        <a href="{{ path('admin_ads_index') }}"> Retour </a>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">
+                    <h4 class="mt-2"><strong class="strong2">Corriger les commentaires ?</strong></h4>
+                </div>
+
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>User</th>
+                                <th>Note</th>
+                                <th>Commentaires</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for comment in ad.comments %}
+                            <tr>
+                                <td>{{comment.id}}</td>
+                                <td>{{comment.author.firstName}} {{comment.author.lastName}}</td>
+                                <td>{{comment.rating}}</td>
+                                <td>{{comment.content}}</td>
+                                <td> <a href=" {{ path ('admin_comm_edit', {'id':ad.id}) }}" class="btn btn-primary">
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card bg-light mt-3">
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{{ form_end(form) }}
+
+
+{#============================#}
+
+
+{% endblock %}
+
+{#============================#}
+{#{% block _ad_images_widget %}
+{{ form_widget(form)}}
+{% endblock %}
+
+    {% block _ad_images_entry_widget %}
+
+    {% endblock %}
+#}

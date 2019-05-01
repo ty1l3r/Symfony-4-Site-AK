@@ -1,0 +1,46 @@
+
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des annonces{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h3 class="my-2">Gestion des Tracks</h3>
+        <table class="table table-hover">
+            <thead>
+                <th class="text-center align-middle">Id</th>
+                <th>Titre</th>
+                <th class="text-center align-middle">note</th>
+                <th>Genre</th>
+                <th>Durée</th>
+                <th class="text-center align-middle">Prix</th>
+                <th>Auteur</th>
+                <th class="text-center align-middle">Photo</th>
+                <th class="text-center align-middle">Action</th>
+            </thead>
+
+            <tbody>
+                {% for ad in ads %}
+                <tr>
+                    <td class="text-center"><span class="badge badge-primary rounded">{{ad.id}}</span></td>
+                    <td>{{ad.title}}</td>
+                    <td class="text-center">
+                    <span class="badge badge-primary rounded pr-2 pl-2 ">{{ad.avgRatings| length}}</span></td>
+                      <td clas="text-center">{{ad.genre}}</td>
+                    <td>{{ad.duree| date('H:i') }} </td>
+                    <td class="text-center"><span class="badge badge-primary rounded">{{ad.price}}</span></td>
+                    <td>{{ad.author.firstName}} {{ad.author.lastName}}</td>
+                    <td class="text-center align-middle"><img class="rounded-circle5 mr-1"
+                    src="{{ad.author.picture}}" alt=""></td>
+                  
+                  <td class="text-center align-middle">
+                    <a href="{{ path ('admin_ads_edit' , {'id': ad.id }) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                    <a href="{{ path ('admin_ads_delete' , {'id': ad.id }) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                  </td>
+                {% endfor %}
+                </tr>      
+            </tbody>
+
+        </table>
+    </div>
+{% endblock %}

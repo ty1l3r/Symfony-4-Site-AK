@@ -24,7 +24,7 @@
 
                             <a href=" {{ path('user_show' , {'slug': a.slug } ) }} ">
                                 <p class="p2">{{ad.author.firstName}}
-                            </a> a posté
+                            </a>  a posté
                             {{ ad.author.ads | length}} tracks</p>
 
                         </div>
@@ -124,7 +124,7 @@
                            Note globale des visiteurs <br>
                           
                     </div>
-                    <div class="col">
+                    <div class="col-md">
                          
                         {% include 'partials/rating.html.twig' with {'rating' : ad.avgRatings} %} 
                         <small> Calculé sur {{ ad.comments | length }} note(s) </small>
@@ -137,10 +137,13 @@
 
     {% for comment in ad.comments %}
 
-        <strong> {{ comment.author.firstName }} : </strong>
-        <blockquote>
+         <a href=" {{ path('user_show' , {'slug': a.slug } ) }} ">
+                                <p class="p2">{{comment.author.firstName }}
+                            </a> a dit :</p>
+
+        <blockquote class="mt-2">
             {{ comment.content}}
-        </blockquote> Note : 
+        </blockquote class="border"> Note : 
 {#=====  Boucles étoiles - Injection avec données ====== #}  
 {% include 'partials/rating.html.twig' with {'rating': comment.rating} %}
 {#====================================================== #} 

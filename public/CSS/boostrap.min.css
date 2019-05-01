@@ -74,7 +74,7 @@ section {
 body {
     margin: 0;
     font-family: 'Playfair Display', serif;
-    font-size: 0.9375rem;
+    font-size: 17px;
     font-weight: 400;
     line-height: 1.5;
     color: #fff;
@@ -421,7 +421,7 @@ h3,
 
 h4,
 .h4 {
-    font-size: 1.40625rem
+    font-size: 16px;
 }
 
 h5,
@@ -5357,7 +5357,7 @@ input[type="button"].btn-block {
 .card-header {
     padding: 0.75rem 1.25rem;
     margin-bottom: 0;
-    background-color: #444;
+    background-color: #404040;
     border-bottom: 1px solid rgba(0, 0, 0, 0.125)
 }
 
@@ -5703,7 +5703,7 @@ input[type="button"].btn-block {
 .badge {
     display: inline-block;
     padding: 0.25em 0.4em;
-    font-size: 75%;
+    font-size: 110%;
     font-weight: 700;
     line-height: 1;
     text-align: center;
@@ -7460,7 +7460,7 @@ button.bg-secondary:focus {
 }
 
 .bg-success {
-    background-color: #00bc8c !important
+    background-color: #085642 !important
 }
 
 a.bg-success:hover,
@@ -11848,11 +11848,11 @@ a.text-dark:focus {
 }
 
 .alert-success {
-    background-color: #00bc8c
+    background-color: #456f64
 }
 
 .alert-info {
-    background-color: #3498DB
+    background-color: #36586F
 }
 
 .alert-warning {

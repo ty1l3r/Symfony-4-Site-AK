@@ -56,6 +56,9 @@ class AdController extends AbstractController
     public function index(AdRepository $repo)
     {   
 
+        //méhode find : permet de retrouver un enregistrement par son identifiant.
+        
+
         $ads = $repo->findAll();
 
         return $this->render('ad/index.html.twig', [
