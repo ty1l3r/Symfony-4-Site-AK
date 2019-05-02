@@ -1,65 +1,143 @@
-// DOM
-var context = document.querySelector('.music-container');
-var controls = document.querySelector('.controls');
-
-//CONST
-var CLIENTID = 'd438c4a17e1716c6db0c5fbefc2c8876';
-
-// VARS
-var audioPlayer;
-
-// Init Soundcloud Widget
-SC.initialize({
-	client_id: CLIENTID,
-	redirectURI: 'http://localhost:9001'
-});
-
-SC.stream('tracks/1326276').then(function(player) {
-	audioPlayer = player;
-	init();
-});
-
-function toggleHover() {
-	context.classList.toggle('is-hovering');
-}
-
-// FN
-function handleControlsClick(e) {
-	var trgt = e.target;
-	if (trgt.nodeName !== 'LABEL' && !audioPlayer) {
-		return;
+$(document).ready( function() {
+  
+	var pagesMax = 30;
+	var pagesMin = 1;
+	var startPage = 7;
+	var url = "http://yoursite.com/results?page={{1}}";
+	
+	$('.pagination .pageSlider').slider({
+  
+	  value: startPage, max: pagesMax, min: pagesMin,
+	  animate: true,
+	  
+	  create: function( event, ui ) {
+		
+		$('.pagination .pageSlider .ui-slider-handle').attr({
+		  "aria-valuenow": startPage,
+		  "aria-valuetext": "Page " + startPage,
+		  "role": "slider",
+		  "aria-valuemin": pagesMin,
+		  "aria-valuemax": pagesMax,
+		  "aria-describedby": "pageSliderDescription" 
+		});
+		 
+		$('.pagination .pageInput').val( startPage );
+  
+	  }
+	
+	}).on( 'slide', function(event,ui) {
+		
+		// let user skip 10 pages with keyboard ;)
+		if( event.metaKey || event.ctrlKey ) {
+		  
+		  if( ui.value > $(this).slider('value') ) {
+			
+			if( ui.value+9 < pagesMax ) { ui.value+=9; } 
+			else { ui.value=pagesMax }
+			$(this).slider('value',ui.value);
+		  
+		  } else {
+			
+			if( ui.value-9 > pagesMin ) { ui.value-=9; } 
+			else { ui.value=pagesMin }
+			$(this).slider('value',ui.value);
+			
+		  }
+		  
+		  event.preventDefault();
+		  
+		}
+		
+		$('.pagination .pageNumber span').text( ui.value );
+		$('.pagination .pageInput').val( ui.value );
+		
+	}).on('slidechange', function(event, ui) {
+	  
+		$('.pagination .pageNumber')
+		  .attr('role','alert')
+		  .find('span')
+		  .text( ui.value );
+	  
+		$('.pagination .pageInput').val( ui.value );
+		
+		$('.pagination .pageSlider .ui-slider-handle').attr({
+		  "aria-valuenow": ui.value,
+		  "aria-valuetext": "Page " + ui.value 
+		});
+	  
+	});
+  
+  $('.pagination .pageSlider .ui-slider-handle').on( 'keyup' , function(e) {
+	
+	if( e.which == 13 ) {
+	  var curPage = $('.pagination .pageSlider').slider('value');
+	  alert( 'we would now send you to: ' + url.replace( /{{.}}/ , curPage ));
 	}
-
-	switch (trgt.className) {
-		case 'lbl-btn-play':
-			audioPlayer.play();
-			break;
-		case 'lbl-btn-pause':
-			audioPlayer.pause();
-			break;
-		case 'lbl-btn-reset':
-			audioPlayer.seek(0);
-			audioPlayer.play();
-			break;
-		default:
-			return false;
+	
+  });
+  
+  $('.pagination .pageInput').on( 'change' , function(e) {
+	$('.pagination .pageSlider').slider( 'value', $(this).val() );
+  });
+  
+	var tmr;
+	$('.pageSkip').on('click', function(e) {
+	  
+	  e.preventDefault();
+	  
+	  var $this = $(this);
+	  
+	  if( $this.hasClass('pageNext') ) {
+		var curPage = $('.pagination .pageSlider').slider('value')+1;
+	  } else if( $this.hasClass('pagePrev') ) {
+		var curPage = $('.pagination .pageSlider').slider('value')-1;
+	  }
+	  
+	  $('.pagination .pageSlider').slider('value',curPage);
+	  
+	  clearTimeout(tmr);
+	  tmr = setTimeout( function() {
+		alert( 'we would now send you to: ' + url.replace( /{{.}}/ , curPage ));
+	  },1000);
+	  
+	});
+	
+  function sliderPips( min, max ) {
+	
+	var pips = max-min;
+	var $pagination = $('.pagination .pageSlider');
+   
+	for( i=0; i<=pips; i++ ) {
+  
+	  var s = $('<span class="pagePip"/>').css({ 
+		left: '' + (100/pips)*i + '%' 
+	  });
+	  
+	  $pagination.append( s );
+  
 	}
-}
-
-function init() {
-	context.classList.add('is-hovering');
-
-	setTimeout(function() {
-		controls.querySelector('input#btn-play').checked = true;
-		audioPlayer.play();
-	}, 1000);
-	setTimeout(function() {
-		context.classList.remove('is-hovering');
-	}, 4000);
-
-	controls.addEventListener('click', handleControlsClick);
-
-	if (Modernizr.touch) {
-		context.addEventListener('click', toggleHover);
-	}
-}
+	
+	var minPip = $('<span class="pageMinPip">'+min+'</span>');
+	var maxPip = $('<span class="pageMaxPip">'+max+'</span>');
+	$pagination.prepend( minPip, maxPip );
+	
+  };sliderPips( pagesMin, pagesMax );
+   
+  function sliderLabel() {
+	$('.pagination .ui-slider-handle').append(
+	  '<span class="pageNumber">Page <span>' + 
+	  $('.pagination .pageSlider').slider('value') + 
+	  '</span></span>');
+  };sliderLabel();
+  
+	$('.pagination .pageButton').on('click', function(e) {
+  
+	  e.preventDefault();
+	  var curPage = $('.pagination .pageSlider').slider('value');
+	  alert( 'we would now send you to: ' + 
+			url.replace( /{{.}}/ , curPage ));
+	
+	});
+	
+  });
+  

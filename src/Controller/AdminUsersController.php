@@ -11,20 +11,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Comment;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
+use App\Service\PaginationService;
 
 class AdminUsersController extends AbstractController
 {
     /**
-     * @Route("/admin/users", name="admin_users_index")
+     * @Route("/admin/users/{page<\d+>?1}", name="admin_users_index")
      */
-    public function index(AdRepository $repo)
+    public function index(AdRepository $repo, $page, PaginationService $pagination)
     {
-        $repo = $this->getDoctrine()->getRepository(User::class);
+        $pagination->setEntityClass(User::class)
+        -> setPage($page);
 
-        $users = $repo->findAll();
+  
 
         return $this->render('admin/users/index.html.twig', [
-            'users' => $users,
+           
+            'pagination' => $pagination,
     
         ]);
     }

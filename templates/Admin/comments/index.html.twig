@@ -4,6 +4,31 @@
 {% block title %}Administration des commentaires{% endblock %}
 
 {% block body %}
+
+
+<div class="row  mt-0 pt-0">
+          <div class="col">
+        {% set page = pagination.page %}
+        {% set pages = pagination.pages %}
+                <ul class="pagination pagination mt-3  d-flex justify-content-center">
+                <li class="page-item {% if page == 1 %}disabled{% endif %}">
+                <a class="page-link" href="{{ path('admin_comment_index', {'page': page -1 }) }}">&laquo;</a>
+                </li>
+
+        {% for i in 1..pages %}
+                <li class="page-item {% if page == i %}active{% endif %} ">
+                <a class="page-link" href="{{ path('admin_comment_index', {'page' : i }) }}">{{ i }}</a>
+                </li>
+        {% endfor %}
+
+                <li class="page-item {% if page == pages %}disabled{% endif %}">
+                <a class="page-link" href="{{ path('admin_comment_index', {'page': page +1 }) }}">&raquo;</a>
+                </li>
+                </ul>
+
+        </div>
+</div>
+
     <div class="container-fluid">
         <h3 class="my-2">ADMINISTRATION DES COMMENTAIRES ET NOTES</h3>
         <table class="table table-hover">
@@ -17,7 +42,7 @@
                 <th>Action</th>
             </thead>
             <tbody>
-                  {% for comment in comments %}
+                  {% for comment in pagination.data %}
                 <tr>
                     <td class="text-center align-middle"><span class="badge badge-success rounded">{{comment.id}}</span></td>
                     <td class="text-center align-middle">{{comment.createdAt | date('d/m/Y H:i')}}</td>

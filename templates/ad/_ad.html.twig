@@ -1,12 +1,12 @@
 
 
-        <div class="col-md-4 float-left">
-            <div class="card bg-dark mb-3">
+        <div class="col-md-12 float-left">
+            <div class="card bg-dark mb-4">
                 <div class="card-horizontal">
                     <div class="img-square-wrapper ">
                         <div class="text-center">
-                    <img style="max-height: 250px; max-width: 250px" src="{{ ad.image }}" alt="Card image"
-                    class="text-center mt-3">
+                    <img style="max-height: 200px; max-width: 200px" src="{{ ad.image }}" alt="Card image"
+                    class="mt-4 ml-4 mb-3 float-left">
                     </div>
                 
                     <div class="card-body">
@@ -30,7 +30,7 @@
                     <h6 class="card-title"><strong>Prix : </strong>{{ ad.price }} Euros </h6>
     <hr class="hr4">
 
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
+                        <p class="card-text mt-3">Some quick example text to build on the card title and make up the bulk of the card's content.
                         Some quick example text to build on the card title and make up the bulk of the card's content.
                         Some quick example text to build on the card title and make up the bulk of the card's content.
                         Some quick example text to build on the card title and make up the bulk of the card's content.
@@ -42,7 +42,7 @@
         <div class="card-footer ">
             <div class="text-center">
             <small class="text-muted"> <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-success mr-1">Ecouter</a></small>
-                {% if app.user and app.user is same as(ad.author) or is_granted ('ROLE_ADMIN') %}
+                {% if app.user and app.user is same as(ad.author)%}
                 <a href="{{ path('tr-edit', {'id':ad.id}) }} " class="btn btn-warning mr-1">Editer</a>
                 <a href=" {{ path('tr-del', {'id': ad.id}) }} " class="btn btn-danger mr-1">Delete</a>
                 {% endif %}

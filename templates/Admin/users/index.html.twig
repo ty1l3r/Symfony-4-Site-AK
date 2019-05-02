@@ -8,25 +8,52 @@
     <div class="row">
         <div class="col">
         
-        <div class="card border-success mb-3">
+        <div class="card border-success">
             <div class="card-header">FAQ - Supprimer un utilisateur</div>
-            <div class="card-body">
-                <p class="card-text">Pour supprimer un utilisateur, il faut d'abord supprimer ses <a href="{{ path ('admin_ads_index')}}">annonces</a>
+            <div class="card-body pt-0 ">
+                <p class="card-text mt-3">Pour supprimer un utilisateur, il faut d'abord supprimer ses <a href="{{ path ('admin_ads_index')}}">annonces</a>
                 et ses <a href="{{path('admin_comment_index')}}">commentaires</a></p>
             </div>
         </div>
+<div class="row  mt-0 pt-0">
+          <div class="col">
+        {% set page = pagination.page %}
+        {% set pages = pagination.pages %}
+                <ul class="pagination pagination mt-3  d-flex justify-content-center">
+                <li class="page-item {% if page == 1 %}disabled{% endif %}">
+                <a class="page-link" href="{{ path('admin_users_index', {'page': page -1 }) }}">&laquo;</a>
+                </li>
+
+        {% for i in 1..pages %}
+                <li class="page-item {% if page == i %}active{% endif %} ">
+                <a class="page-link" href="{{ path('admin_users_index', {'page' : i }) }}">{{ i }}</a>
+                </li>
+        {% endfor %}
+
+                <li class="page-item {% if page == pages %}disabled{% endif %}">
+                <a class="page-link" href="{{ path('admin_users_index', {'page': page +1 }) }}">&raquo;</a>
+                </li>
+                </ul>
+
+        </div>
+</div>
+
+        <br>
 
 
             <table class="table table-hover">
-                <thead>
+                <thead class="mb-1">
                     <th>Id</th>
                     <th>Picture</th>
                     <th>Utilisateur</th>
                     <th>Email</th>
-                    <th>Action</th>
+                    <th class="text-center align-middle">Action</th>
                 </thead>
+ 
                 <tbody>
-                      {% for user in users %}
+            
+                      {% for user in pagination.data  %}
+                                
                 <tr>
         <td>{{user.id}}</td>
         <td><img src="{{user.picture}}" alt="pictur"></td>

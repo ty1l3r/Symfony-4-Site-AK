@@ -49,7 +49,7 @@ class AppFixtures extends Fixture
         $users = [];
         $genres = ['male','female'];
 
-        for ($i = 1; $i <= 10; $i++) 
+        for ($i = 1; $i <= 20; $i++) 
         {
           $user = new User();
 

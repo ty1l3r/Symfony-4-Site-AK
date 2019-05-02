@@ -27,7 +27,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\Booking;
+use App\Service\PaginationService;
 
 class AdController extends AbstractController 
 {
@@ -51,18 +51,29 @@ class AdController extends AbstractController
     }
 /* =============================== TRACKLIST - AD ================================= */
     /**
-     * @Route("/tracklist", name="ad")
+     * @Route("/tracklist/{page<\d+>?1}", name="ad")
      */
-    public function index(AdRepository $repo)
+    public function index(AdRepository $repo, $page, PaginationService $pagination)
     {   
 
         //méhode find : permet de retrouver un enregistrement par son identifiant.
         
-
-        $ads = $repo->findAll();
-
+        $pagination->setEntityClass(Ad::class)
+                    -> setPage($page);
+        
+                    $ads = $repo->findAll();
+        
+       
         return $this->render('ad/index.html.twig', [
+
+            //'ads' => $pagination->getData(),
+            //'pages' => $pagination->getPages(),
+            //'page' => $page
+
+            //version optimale
+            'pagination' => $pagination,
             'ads' => $ads
+
         ]);
     }
 /* ======================== TRACKLIST/NEW - TR-CREATE ============================= */
