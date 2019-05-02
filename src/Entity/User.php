@@ -15,7 +15,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity(fields={"email"}, message= "User already exist")
  */
 class User implements UserInterface
-{
+{   
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

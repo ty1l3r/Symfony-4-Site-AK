@@ -56,23 +56,15 @@ class AdController extends AbstractController
     public function index(AdRepository $repo, $page, PaginationService $pagination)
     {   
 
-        //méhode find : permet de retrouver un enregistrement par son identifiant.
-        
         $pagination->setEntityClass(Ad::class)
-                    -> setPage($page);
-        
-                    $ads = $repo->findAll();
-        
-       
+        -> setPage($page)
+        -> setLimit(6);
+
+        $ads = $repo->findAll();
+          
         return $this->render('ad/index.html.twig', [
-
-            //'ads' => $pagination->getData(),
-            //'pages' => $pagination->getPages(),
-            //'page' => $page
-
-            //version optimale
-            'pagination' => $pagination,
-            'ads' => $ads
+            'ads' => $ads,
+            'pagination' => $pagination,  
 
         ]);
     }

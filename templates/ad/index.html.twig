@@ -3,71 +3,45 @@
 {% block title %} Track List {% endblock %}
 
 {% block body %}
+<div class="container">
+        <div class="row mb-0 ml-1">
 
-
-
-
-        <div class="container">
-                <div class="row mb-0 ml-1">
-
-                        <div class="col" style="">
-                                <div class="col">
-                                        <div class="form-group mt-3">
-                                                <select class="custom-select">
-                                                        <option selected="">choisissez un style musical</option>
-                                                        <option value="1">Original Soundtracks</option>
-                                                        <option value="2">Indie Music</option>
-                                                        <option value="3">Hip-Hop</option>
-                                                        <option value="3">Minimal</option>
-                                                        <option value="3">Electro</option>
-                                                        <option value="3">Jazz</option>
-                                                        <option value="3">Set Techno</option>
-                                                </select>
-                                        </div>
+                <div class="col" style="">
+                        <div class="col">
+                                <div class="form-group mt-3">
+                                        <select class="custom-select">
+                                                <option selected="">choisissez un style musical</option>
+                                                <option value="1">Original Soundtracks</option>
+                                                <option value="2">Indie Music</option>
+                                                <option value="3">Hip-Hop</option>
+                                                <option value="3">Minimal</option>
+                                                <option value="3">Electro</option>
+                                                <option value="3">Jazz</option>
+                                                <option value="3">Set Techno</option>
+                                        </select>
                                 </div>
-
                         </div>
 
-        <div class="col">
-        {% set page = pagination.page %}
-        {% set pages = pagination.pages %}
-                <ul class="pagination pagination mt-3">
-                <li class="page-item {% if page == 1 %}disabled{% endif %}">
-                <a class="page-link" href="{{ path('ad', {'page': page -1 }) }}">&laquo;</a>
-                </li>
-
-        {% for i in 1..pages %}
-                <li class="page-item {% if page == i %}active{% endif %} ">
-                <a class="page-link" href="{{ path('ad', {'page' : i }) }}">{{ i }}</a>
-                </li>
-        {% endfor %}
-
-                <li class="page-item {% if page == pages %}disabled{% endif %}">
-                <a class="page-link" href="{{ path('ad', {'page': page +1 }) }}">&raquo;</a>
-                </li>
-                </ul>
-
-        </div>
-
-
-        <div class="col pl-1 pr-1 ">
-                <form class="form-inline center mt-3">
-  <i class="fas fa-search" aria-hidden="true"></i>
-  <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
-</form>
-        </div>
-
+                </div>
+                {#==== Include pagination ====#}
+                  {{ pagination.display() }}
+                {#============================#}
+                <div class="col pl-1 pr-1 ">
+                        <form class="form-inline center mt-3">
+                                <i class="fas fa-search" aria-hidden="true"></i>
+                                <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+                                        aria-label="Search">
+                        </form>
                 </div>
         </div>
-        <div class="container">
-                <br />
-
-                {% for ad in ads %}
-                {% include  'ad/_ad.html.twig' %}
-                {% endfor %}
-
-
-
+</div>
+<div class="container">
+        <br />
+      
+        {#==== Include boucle Ad ====#}
+        {% include  'ad/_ad.html.twig' %}
+        {#============================#}
+       
 </div>
 
-        {% endblock %}
+{% endblock %}

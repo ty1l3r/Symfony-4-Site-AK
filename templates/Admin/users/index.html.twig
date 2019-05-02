@@ -15,28 +15,9 @@
                 et ses <a href="{{path('admin_comment_index')}}">commentaires</a></p>
             </div>
         </div>
-<div class="row  mt-0 pt-0">
-          <div class="col">
-        {% set page = pagination.page %}
-        {% set pages = pagination.pages %}
-                <ul class="pagination pagination mt-3  d-flex justify-content-center">
-                <li class="page-item {% if page == 1 %}disabled{% endif %}">
-                <a class="page-link" href="{{ path('admin_users_index', {'page': page -1 }) }}">&laquo;</a>
-                </li>
-
-        {% for i in 1..pages %}
-                <li class="page-item {% if page == i %}active{% endif %} ">
-                <a class="page-link" href="{{ path('admin_users_index', {'page' : i }) }}">{{ i }}</a>
-                </li>
-        {% endfor %}
-
-                <li class="page-item {% if page == pages %}disabled{% endif %}">
-                <a class="page-link" href="{{ path('admin_users_index', {'page': page +1 }) }}">&raquo;</a>
-                </li>
-                </ul>
-
-        </div>
-</div>
+    {#==== Include pagination ====#}
+      {{ pagination.display() }}
+    {#============================#}     
 
         <br>
 
@@ -52,7 +33,7 @@
  
                 <tbody>
             
-                      {% for user in pagination.data  %}
+        {% for user in pagination.data  %}
                                 
                 <tr>
         <td>{{user.id}}</td>

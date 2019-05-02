@@ -20,7 +20,9 @@ class AdminCommentController extends AbstractController
     public function index(AdRepository $repo, $page, PaginationService $pagination)
     {
         $pagination->setEntityClass(Comment::class)
-        -> setPage($page);
+        -> setPage($page)
+        -> setLimit(8);
+
 
         $repo = $this->getDoctrine()->getRepository(Comment::class);
  
