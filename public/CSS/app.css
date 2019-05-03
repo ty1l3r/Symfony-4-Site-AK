@@ -165,7 +165,7 @@ border: 1px solid #d5dbdd;
 padding: 5px 15px;
 border-radius: 5px;
 box-shadow: 0px 25px 33px rgba(32, 0, 0, 0.04);
-background: #e9e9e9;
+background: #bbbbbb;
 }
 
 .row-section .media .media-left img {
@@ -603,12 +603,7 @@ height: 100%;
     font-size: 18px;
     font-weight: normal;
   }
-  p {
-    text-align: center;
-    font-size: 15px;
-    color: #e0e0e0;
-    margin-top: 50px;
-  }
+
   #pageSliderDescription {
     position: absolute;
     left: -999em;

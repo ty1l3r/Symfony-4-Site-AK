@@ -155,7 +155,7 @@ class AdController extends AbstractController
 
     /**
      * Undocumented function
-     *@Route ("/tracklist/{id}", name="tr-show")
+     *@Route ("/tracklist/listen/{id}", name="tr-show")
      * @param Ad $ad
      * @param Request $request
      * @param ObjectManager $manager

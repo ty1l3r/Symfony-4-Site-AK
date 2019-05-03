@@ -4,7 +4,7 @@
 
   {% block body %}
 
-  <div class="container-fluid mt-4">
+  <div class="container-fluid mt-5">
       <div class="row">
           <div class="col">
               <div class="card bg-primary text-white mb-3 text-center">
@@ -66,8 +66,8 @@
       <hr>
       <div class="row">
           <div class="col">
-              <div class="alert alert-success">
-                  <h2 class="alert-heading my-3"><i class="fas fa-arrow-up"></i> Tracks populaires</h2>
+              <div class="alert alert-success my-2">
+                  <h2 class="alert-heading my-2"><i class="fas fa-arrow-up"></i> Tracks populaires</h2>
 
                   <table class="table table-hover">
                       <thead>
@@ -96,37 +96,40 @@
                   </table>
               </div>
           </div>
-          <div class="col">
-              <div class="alert alert-danger">
-                  <h2 class="alert-heading my-3"><i class="fas fa-arrow-down"></i> Tracks impopulaires</h2>
+                    <div class="col">
+              <div class="alert alert-danger my-2" style="padding-bottom: 21.5px">
+                  <h2 class="alert-heading my-2"><i class="fas fa-arrow-up"></i> Tracks impopulaires</h2>
 
                   <table class="table table-hover">
                       <thead>
+                   
                           <tr>
                               <th>Track</th>
-                              <th>Compostieur</th>
+                              <th>Auteur</th>
                               <th>Moyenne</th>
                           </tr>
+                 
                       </thead>
                       <tbody>
-                   {% for ad in worstTracks %}
+             {% for ad in worstTracks %}
                           <tr>
                               <td>{{ ad.title }}</td>
                               <td>{{ad.firstName}} {{ad.lastName}}</td>
-                  
                               <td class="text-center">
                                   <span class="badge badge-dark">
-                                      {{ad.note | number_format(1,","," ")}}
+                                    {{ad.note | number_format(1,","," ")}}
                                   </span>
                               </td>
-                  {% endfor %}
+              {% endfor %}
                           </tr>
 
                       </tbody>
                   </table>
               </div>
           </div>
+      
       </div>
   </div>
+  <br><br>
 
   {% endblock %}

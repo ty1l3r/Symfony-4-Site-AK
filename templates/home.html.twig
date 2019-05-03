@@ -2,6 +2,8 @@
 
 {% block body %}
 
+
+
 <div class="container" <div class="jumbotron mt-5">
     <h1 class="display-3 title"> H4 | FULLSTACK MUSIC</h1>
     <hr class="hr2">
@@ -40,77 +42,26 @@
  <!--================================================ -->  
 
  <hr class="hr2 mb-5">
+ <div>
+<h3 class="h1 mt-3 mb-4">Top Rated</h3>
 
-    <div class="row">
-        <div class="col-md-4">
-     
-         
-            <div class="card bg-dark mb3">
-                <div class="card-header text-center">
-                    Just the last<strong>0,99 Euros</strong><br>
-                    <small>pas encore mise en ligne</small>
-                </div>
-                <img src="https://picsum.photos/600/400/?random" alt="Graphique de la track" style="height:200px; width: 100%; display: block">
+<div class="row">
+ {% for data in ads %}
+    {% include 'ad/_ad.html.twig' with {'ad': data.annonce} %}
+    
+{% endfor %}
+ </div>
 
-                <div class="card-body">
-                    <h4>Track de folie </h4>
-                    <p class="card-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque ducimus eius nihil doloremque
-                        aliquam? Voluptatibus unde dolorum distinctio neque eius?
-                    </p>
-                    <a href="#" class="btn btn-secondary"> Acheter </a>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-md-4">
-          
-            <div class="card bg-dark mb3">
-                <div class="card-header text-center">
-                    Just the last<strong>0,99 Euros</strong><br>
-                    <small>pas encore mise en ligne</small>
-                </div>
-                <img src="https://picsum.photos/600/400/?random" alt="Graphique de la track" style="height:200px; width: 100%; display: block">
-
-                <div class="card-body">
-                    <h4>Track de folie </h4>
-                    <p class="card-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque ducimus eius nihil doloremque
-                        aliquam? Voluptatibus unde dolorum distinctio neque eius?
-                    </p>
-                    <a href="#" class="btn btn-secondary"> Acheter </a>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-         
-            <div class="card bg-dark mb3">
-                <div class="card-header text-center">
-                    Just the last<strong>0,99 Euros</strong><br>
-                    <small>pas encore mise en ligne</small>
-                </div>
-                <img src="https://picsum.photos/600/400/?random" alt="Graphique de la track" style="height:200px; width: 100%; display: block">
-
-                <div class="card-body">
-                    <h4>Track de folie </h4>
-                    <p class="card-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque ducimus eius nihil doloremque
-                        aliquam? Voluptatibus unde dolorum distinctio neque eius?
-                    </p>
-                    <a href="#" class="btn btn-secondary"> Acheter </a>
-                </div>
-
-            </div>
-        </div>
-    </div> <!-- EO Row-->
+</div>
+ 
+</div>
 
  <!--================================================ -->  
 
-     <hr class="hr2 mb-3">
-
-
-    <h2 class="h1 mt-3 mb-4">TOP RATED</h2>
+   <div class="container">
+  
+    <h2 class="h1 mt-3 mb-4">Last</h2>
+  
     <div class="row">
         <div class="col">
 
@@ -145,8 +96,8 @@
     </div>
 
 
-</div> <!-- EO container-->
+ <!-- EO container-->
 
-<hr class="hr2">
+  </div>
 
 {% endblock %}

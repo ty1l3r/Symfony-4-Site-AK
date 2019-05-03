@@ -34,14 +34,16 @@
                         </form>
                 </div>
         </div>
-</div>
-<div class="container">
+
+
         <br />
-      
+   <div class="row">
+         {% for ad in pagination.data  %}
         {#==== Include boucle Ad ====#}
         {% include  'ad/_ad.html.twig' %}
         {#============================#}
-       
+          {% endfor %}
+   </div>
 </div>
 
 {% endblock %}

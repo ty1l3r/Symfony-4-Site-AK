@@ -1,104 +1,120 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} page de {{user.firstName}} {% endblock %}
+{% block title %} Porfil {{user.firstName}} {% endblock %}
 
 {% block body %}
 
 <div class="container mt-3 mb-3">
-    <div class="card border-secondary pt-4 pb-1 mb-3">
-         <div class="row ml-3 ">
-            <div class="col-2 text-center1 pr-1 border-right ">
-                                        <img src="{{user.picture}}" class="rounded-circle4 img-responsive" alt="avatar de {{user.firstname}} . {{user.lastName}}">
+    <div class="card border-primary mb-3">
+        <div class="row">
+            <div class="col-md-2 ml-3 mt-3 mb-3 border-right">
+                    <img src="{{user.picture}}" class="rounded-circle4 img-responsive" alt="avatar de {{user.firstname}} . {{user.lastName}}">
 
 
-                <!-- app.user = utilisateur actuellement connecté --> 
-     {% if user is same as(app.user) %}
-
-                <div class="mt-3">
-                    <a href="{{ path('account_profile') }}" class="badge badge-primary mb-0">Edit Profil</a>
-                </div>                           <!--  EO --> 
-
-                <!-- Modification de mot de passe --> 
-                    <div class="mt-0">
-                        <a href="{{ path('account_password') }}" class="badge badge-primary mr-2 mb-2">New Password</a>
-                    </div>           <!--  EO --> 
-    <br>                  
-            </div>
-     {% endif %}
-
-            
-                <div class="col-10 pr-8  ">
-                        <h1>{{user.firstname}} {{user.lastName}}</h1>
-
-                    <div class="mt-0 mb-0">
-                         <span class="badge badge-primary mb-4">{{ user.ads  | length }} posts </span>
+                    <!-- app.user = utilisateur actuellement connecté --> 
+{% if user is same as(app.user) %}
+                    <div class="mt-1 mb-0">
+                        <span class="badge badge-primary mt-2"   style="font-size:15px;">{{ user.ads  | length }} posts </span>
                     </div>
 
-                        <hr class="hrr">
+                    <div class="mb-1 mt-2">
+                        <a href="{{ path('account_profile') }}" class="badge badge-success mb-0"
+                        style="font-size:15px;">Edit Profil</a>
+                    </div>                           <!--  EO --> 
 
-                        {{user.introduction  | raw }}
+                    <!-- Modification de mot de passe --> 
+                        <div class="mt-2">
+                            <a href="{{ path('account_password') }}" class="badge badge-success mr-2 mb-2"
+                            style="font-size:15px;">New Password</a>
+                        </div>  
+              
+         <!--  EO --> 
+                        
+            </div>
 
-                        <hr class="hrr mb-2 pb-2">
+{% endif %}
 
-                        <h5>Contributions de {{user.firstName}}</h5> 
+                
+                    <div class="col-md-9 mt-3">
+                            <h2 style="color:#69c1e7">{{user.firstname}} {{user.lastName}}</h2>
+                            <hr class="hr4">
+                            <h4 style="color:#69c1e7">Desciption :</h4>
+                            {{user.introduction  | raw }}
 
-                        {% if user.ads | length >0 %}
+                            <hr class="hrr mb-2 pb-2">
 
-                         {% for ad in user.ads %}    
+                            
+                        
+                            {% if user.ads | length >0 %}
 
-                 </div>    
-     <!-- ======================  -->   
-          </div>
-</div>
-</div>
+                            {% for ad in user.ads %}    
+
+                    </div>    
+        </div>
         
-<div class="container mt-3 mb-3 ">
-    <div class="col-md-4 float-left col-3">
-        <div class="card mb-6 pb-0">
+    </div>
+</div>
+
+<div class="container">
+<div class="alert alert-dismissible alert-primary">
+       
+         <h2 class="mt-1 mb-1" style="font-size:24px"> <i class="fas fa-arrow-circle-down align-middle" style="font-size:40px"> </i> &nbsp&nbspContributions de {{user.firstName}}</h2>
+</div>
+</div>
 
 
-            <h1 class="card-body ml-1 pt-2 pb-2 titleShort" style= "font-size: 30px; color: #71c2e">
-            <a class="atitre" href="{{ path('tr-show', {'id':ad.id}) }} "> {{ ad.title}} </a></h1>
+<div class="container">       
+<div class="col-md-6 pl-0 pr-0">
+    <div class="card border-warning mb-3" style="max-width: 35rem;">
+        <div class="card-header ml-1 mr-1">
+            <h1 class="titleShort" style="color: #71c2e">
+                <a class="atitre pb-1" style="font-size:18px;" href="{{ path('tr-show', {'id':ad.id}) }} ">
+                    {{ ad.title}} </a></h1>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 ">
+                    <img style="max-height: 160 px; max-width: 160px;" src="{{ ad.image }}" alt="Card image"
+                        class="d-flex justify-content-center mb-2">
 
+                    {% if ad.comments|length > 0 %}
+                    {% include 'partials/rating.html.twig' with {'rating': ad.avgRatings} %}
+                    {% else %}
+                    <small>Vous n'avez pas encore noté cette track </small>
+                    {% endif %}
+                    {% set a = ad.author %}
 
-            <div class=""><img style="height: 230px; width: 230px" src="{{ ad.image }}" alt="Card image"
-                    class="img-responsive center-block ml-4"></div>
-
-            <div class="card-body  pt-4 pb-0">
-                <h6 class="card-title"><strong>Genre :</strong> {{ ad.genre }} </h6>
-                <h6 class="card-title"><strong>Durée : </strong> {{ ad.duree| date('H:i') }} </h6>
-                <h6 class="card-title"><strong>Prix : </strong>{{ ad.price }} Euros </h6>
-            </div>
-            <hr class="pt-0 pb-0">
-            <div class="card-body pt-0 pb-0">
-                <p class="card-text ml-1 mt-0 mb-0 strong1"> <strong>Infos : </strong>
-                    Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-            </div>
-            <hr class="pt-0 pb-0">
-            <div class="card-body pt-0 pb-0">
-                {% set a = ad.author %}
-                <h6 class="card-title pb-0">Posté par : <a
-                        href="{{ path('user_show' , {'slug': a.slug } ) }}">{{ad.author.firstName}} </a></h6>
-            </div>
-            <div class="card-footer text-muted pt-3 pb-3 ml-0 mr-0 ">
-                <div class="text-center mr-0 ml-0">
-                <!-- BOUTONS EDIT / DELETE / VIEW -->
-                <div class="rowShow">
-                    
-                <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-success mr-1">Ecouter</a>
-                {% if app.user and app.user is same as(ad.author) %}
-                <a href="{{ path('tr-edit', {'id':ad.id}) }} " class="btn btn-warning mr-1">Editer</a>
-                <a href=" {{ path('tr-del', {'id': ad.id}) }} " class="btn btn-danger mr-1">Delete</a>
-                {% endif %}
-            </div>
+                    <h6 class="card-title pb-0 mt-1 ">Posté par : <a
+                            href="{{ path('user_show' , {'slug': a.slug } ) }}">{{ad.author.firstName}} </a></h6>
                 </div>
-                <!-- EO BTN -->
-
+        <div class="col-md-8">
+            <h6 class="card-title"><strong>Genre :</strong> {{ ad.genre }} </h6>
+            <h6 class="card-title"><strong>Durée : </strong> {{ ad.duree| date('H:i') }} </h6>
+            <h6 class="card-title"><strong>Prix : </strong>{{ ad.price }} Euros </h6>
+            <h6 class="card-title"><strong>Année : </strong>{{ ad.annee }} </h6>
+            <hr class="hr4">
+            <strong> About : </strong>
+            <h6 class="card-text mt-1">Some quick example text to build on the card title and make up the bulk
+                of the card's content.
+                Some quick example text to build on the card title and make up the bulk of the card's content.
+                Some quick example text to build on the card title and make up the bulk of the card's content.
+                Some quick example text to build on the card title and make up the bulk of the card's content.
+            </h6>
+        </div>
             </div>
+    <div class="card-footer mt-3 ">
+        <div class="">
+            <small class="text-muted"> <a href="{{ path('tr-show', {'id':ad.id}) }} "
+                    class="btn btn-success mr-1">Ecouter</a></small>
+            {% if app.user and app.user is same as(ad.author)%}
+            <a href="{{ path('tr-edit', {'id':ad.id}) }} " class="btn btn-warning mr-1">Editer</a>
+            <a href=" {{ path('tr-del', {'id': ad.id}) }} " class="btn btn-danger mr-1">Delete</a>
+            {% endif %}
         </div>
     </div>
+        </div>
     </div>
+</div>
 
 
 
@@ -113,7 +129,7 @@
             {% endif %}
 
        
-        
+ </div>        
 
      <!-- ======================  -->    
 

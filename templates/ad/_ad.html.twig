@@ -1,54 +1,51 @@
+<div class="col-md-6">
+    <div class="card border-primary mb-3" style="max-width: 35rem;">
+        <div class="card-header">
+            <h1 class="titleShort" style="color: #71c2e">
+                <a class="atitre pb-1" style="font-size:18px;" href="{{ path('tr-show', {'id':ad.id}) }} ">
+                    {{ ad.title}} </a></h1>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 ">
+                    <img style="max-height: 160 px; max-width: 160px;" src="{{ ad.image }}" alt="Card image"
+                        class="d-flex justify-content-center mb-2">
 
-  {% for ad in pagination.data  %}
-        <div class="col-md-12 float-left">
-            <div class="card bg-dark mb-4">
-                <div class="card-horizontal">
-                    <div class="img-square-wrapper ">
-                        <div class="text-center">
-                    <img style="max-height: 200px; max-width: 200px" src="{{ ad.image }}" alt="Card image"
-                    class="mt-4 ml-4 mb-3 float-left">
-                    </div>
-                
-                    <div class="card-body">
-                        <h1 class="titleShort mb-1" style= "font-size: 30px; color: #71c2e">
-                    <a class="atitre pb-1" href="{{ path('tr-show', {'id':ad.id}) }} "> {{ ad.title}} </a></h1>
-
-                       {# Affichage des notes #}
                     {% if ad.comments|length > 0 %}
-                        {% include 'partials/rating.html.twig' with {'rating': ad.avgRatings} %}
+                    {% include 'partials/rating.html.twig' with {'rating': ad.avgRatings} %}
                     {% else %}
-                    <small>Pas encore noté (écoutez et notez cette track ! </small>
-                    {% endif %} 
+                    <small>Vous n'avez pas encore noté cette track </small>
+                    {% endif %}
+                    {% set a = ad.author %}
 
-    <hr class="hr4">
-                         {% set a = ad.author %}
-                        <h6 class="card-title pb-0 ">Posté par : <a
-                        href="{{ path('user_show' , {'slug': a.slug } ) }}">{{ad.author.firstName}} </a></h6>
-
+                    <h6 class="card-title pb-0 mt-1 ">Posté par : <a
+                            href="{{ path('user_show' , {'slug': a.slug } ) }}">{{ad.author.firstName}} </a></h6>
+                </div>
+                <div class="col-md-8">
                     <h6 class="card-title"><strong>Genre :</strong> {{ ad.genre }} </h6>
                     <h6 class="card-title"><strong>Durée : </strong> {{ ad.duree| date('H:i') }} </h6>
                     <h6 class="card-title"><strong>Prix : </strong>{{ ad.price }} Euros </h6>
-    <hr class="hr4">
-
-                        <p class="card-text mt-3">Some quick example text to build on the card title and make up the bulk of the card's content.
+                    <h6 class="card-title"><strong>Année : </strong>{{ ad.annee }} </h6>
+                    <hr class="hr4">
+                    <strong> About : </strong>
+                    <h6 class="card-text mt-1">Some quick example text to build on the card title and make up the bulk
+                        of the card's content.
                         Some quick example text to build on the card title and make up the bulk of the card's content.
                         Some quick example text to build on the card title and make up the bulk of the card's content.
                         Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-
-                    </div>
-                    </div>
+                    </h6>
                 </div>
-        <div class="card-footer ">
-            <div class="text-center">
-            <small class="text-muted"> <a href="{{ path('tr-show', {'id':ad.id}) }} " class="btn btn-success mr-1">Ecouter</a></small>
-                {% if app.user and app.user is same as(ad.author)%}
-                <a href="{{ path('tr-edit', {'id':ad.id}) }} " class="btn btn-warning mr-1">Editer</a>
-                <a href=" {{ path('tr-del', {'id': ad.id}) }} " class="btn btn-danger mr-1">Delete</a>
-                {% endif %}
+            </div>
+            <div class="card-footer mt-3 ">
+                <div class="">
+                    <small class="text-muted"> <a href="{{ path('tr-show', {'id':ad.id}) }} "
+                            class="btn btn-success mr-1">Ecouter</a></small>
+                    {% if app.user and app.user is same as(ad.author)%}
+                    <a href="{{ path('tr-edit', {'id':ad.id}) }} " class="btn btn-warning mr-1">Editer</a>
+                    <a href=" {{ path('tr-del', {'id': ad.id}) }} " class="btn btn-danger mr-1">Delete</a>
+                    {% endif %}
                 </div>
-
-        </div>
             </div>
         </div>
- {% endfor %}
+    </div>
+</div>
