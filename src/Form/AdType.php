@@ -9,11 +9,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class AdType extends ApplicationType
 
@@ -44,6 +44,8 @@ class AdType extends ApplicationType
             ->add('image', UrlType::class, $this-> getConfiguration("Image", "Entrez l'URL de l'image"))
             //->add('slug')
             ->add('about', TextareaType::class, $this->getConfiguration("About", "Merci de décrire votre track !"))
+        
+           
             
         ;
     }

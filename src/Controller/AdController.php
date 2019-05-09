@@ -85,9 +85,11 @@ class AdController extends AbstractController
 
         if (!$ad) {
             $ad = new Ad();
+        
         }
 
         $form = $this->createForm(AdType::class, $ad);
+       
 
         $form->HandleRequest($request);
 
@@ -95,6 +97,7 @@ class AdController extends AbstractController
         
         {
             $ad->setAuthor($this->getUser());
+            $ad->setCreatedAt(new \DateTime());
         
             $manager->persist($ad);
             $manager->flush();
