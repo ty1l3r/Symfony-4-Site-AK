@@ -108,8 +108,20 @@ class Ad
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $soundcloud;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $about;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $CreatedAt;
 
     /**
      * Permet de récupérer le commentaire d'un auteur par rapport à une annonce
@@ -244,7 +256,29 @@ class Ad
 
         return $this;
     }
+    public function getSoundcloud(): ?string
+    {
+        return $this->soundcloud;
+    }
 
+    public function setSoundcloud(string $soundcloud): self
+    {
+        $this->soundcloud = $soundcloud;
+
+        return $this;
+    }
+
+    public function getAbout(): ?string
+    {
+        return $this->about;
+    }
+
+    public function setAbout(string $about): self
+    {
+        $this->about = $about;
+
+        return $this;
+    }
     /**
      * @return Collection|Comment[]
      */
@@ -275,6 +309,22 @@ class Ad
 
         return $this;
     }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->CreatedAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $CreatedAt): self
+    {
+        $this->CreatedAt = $CreatedAt;
+
+        return $this;
+    }
+
+
+
+
 
    
 

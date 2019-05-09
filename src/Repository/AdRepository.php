@@ -30,6 +30,7 @@ class AdRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
+
     // /**
     //  * @return Ad[] Returns an array of Ad objects
     //  */

@@ -320,7 +320,7 @@ Line-Height: 14pt;
         color: grey;
  }
  footer p, a {
-font-size: 16px;
+font-size: 14px;
 font-family: 'Roboto', sans-serif;
 }
 footer h6 {
@@ -611,4 +611,13 @@ height: 100%;
     width: 0;
     height: 0;
   }
-  
+  .price{
+    width:100%;
+  }
+ 
+  .ellipsis{
+    width: 200px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }

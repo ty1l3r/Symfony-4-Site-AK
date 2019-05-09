@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SortByDate{% endblock %}
+
+{% block body %}
+       
+ <div class="container mt-3">
+
+    {% include 'search/searchBase.html.twig'%}
+ 
+                <div class="row">
+               
+                        {% for genreAd in genreAds %}
+                         {% include 'ad/_ad.html.twig' with {'ad': genreAd} %}
+                         {% endfor %}
+                </div>
+</div>
+{% endblock %}

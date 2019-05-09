@@ -85,6 +85,9 @@ class AppFixtures extends Fixture
         $image = $faker->imageUrl($width,$height,'nightlife');
         $duree = $faker->dateTime($max = 'now');
         $genre = $faker->word;
+        $createdAt = $faker->dateTime();
+        
+        
  
         $user = $users[mt_rand(0, count($users)-1)];
 
@@ -94,7 +97,10 @@ class AppFixtures extends Fixture
             ->setDuree($duree)
             ->setAnnee(mt_rand (2007,2019))
             ->setImage($image)
-            ->setAuthor($user);
+            ->setAuthor($user)
+            ->setCreatedAt($createdAt)
+            ->setSoundcloud('https://soundcloud.com/hakha-1/sets/filmscore-soundtrack')
+            ->setAbout($faker->realText($maxNbChars = 250, $indexSize = 2));
           
         
         $manager->persist($ad);

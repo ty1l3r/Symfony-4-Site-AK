@@ -1,0 +1,44 @@
+<div class="row mb-0 ml-1 ">
+
+    <div class="col-4 pl-0 mt-3" style="">
+
+                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <button type="button" class="btn btn-primary">Select by Genre</button>
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" x-placement="bottom-start"
+                    style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
+                    <a class="dropdown-item" href="{{ path('searchGenreOST')}}">OST (Original Soundtrack</a>
+                    <a class="dropdown-item" href="{{ path('searchGenreSound')}}">Sound-Design</a>
+                    <a class="dropdown-item" href="{{ path('searchGenreIndie')}}">Indie Music</a>
+                    <a class="dropdown-item" href="{{ path('searchGenreHipHop')}}">Hip-Hop</a>
+                     <a class="dropdown-item" href="{{ path('searchGenreElectro')}}">Electro</a>
+                      <a class="dropdown-item" href="{{ path('searchGenreJazz')}}">Jazz-Affro-Cubin</a>
+                       <a class="dropdown-item" href="{{ path('searchGenreExperimental')}}">Expérimentale</a>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <button type="button" class="btn btn-primary">Sort by</button>
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" x-placement="bottom-start"
+                    style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
+                    <a class="dropdown-item" href="{{ path('searchDate')}}">Date</a>
+                    <a class="dropdown-item" href="{{ path('searchTitle')}}">Titre</a>
+                    <a class="dropdown-item" href="{{ path('searchPrice')}}">Prix croissant</a>
+               
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-4">
+        {#==== Include pagination ====#}
+        {{pagination.display()}}
+        {#============================#}
+    </div>
+</div>

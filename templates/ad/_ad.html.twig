@@ -7,9 +7,9 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-4 ">
+                <div class="col-md-4 mr-3" style="max-height: 160 px; max-width: 160px;">
                     <img style="max-height: 160 px; max-width: 160px;" src="{{ ad.image }}" alt="Card image"
-                        class="d-flex justify-content-center mb-2">
+                        class="d-flex justify-content-center mb-2 rounded img-fluid">
 
                     {% if ad.comments|length > 0 %}
                     {% include 'partials/rating.html.twig' with {'rating': ad.avgRatings} %}
@@ -18,9 +18,12 @@
                     {% endif %}
                     {% set a = ad.author %}
 
-                    <h6 class="card-title pb-0 mt-1 ">Posté par : <a
+                    <h6 class="card-title pb-0 mt-1 " style="font-size:12px">Posté par : <a
                             href="{{ path('user_show' , {'slug': a.slug } ) }}">{{ad.author.firstName}} </a></h6>
+                    <h6 style="font-size:13px">le : {{ad.createdAt | date('d/m/Y')}}</h6>
+                    <h6 style="font-size:13px">à {{ad.createdAt | date('H:i')}}</h6>
                 </div>
+
                 <div class="col-md-8">
                     <h6 class="card-title"><strong>Genre :</strong> {{ ad.genre }} </h6>
                     <h6 class="card-title"><strong>Durée : </strong> {{ ad.duree| date('H:i') }} </h6>
@@ -28,13 +31,10 @@
                     <h6 class="card-title"><strong>Année : </strong>{{ ad.annee }} </h6>
                     <hr class="hr4">
                     <strong> About : </strong>
-                    <h6 class="card-text mt-1">Some quick example text to build on the card title and make up the bulk
-                        of the card's content.
-                        Some quick example text to build on the card title and make up the bulk of the card's content.
-                        Some quick example text to build on the card title and make up the bulk of the card's content.
-                        Some quick example text to build on the card title and make up the bulk of the card's content.
-                    </h6>
+                
+                    <h6 class="card-text mt-1" style="height:105px; overflow:hidden">{{ad.about}}</h6>
                 </div>
+
             </div>
             <div class="card-footer mt-3 ">
                 <div class="">

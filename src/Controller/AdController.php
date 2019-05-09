@@ -58,10 +58,11 @@ class AdController extends AbstractController
 
         $pagination->setEntityClass(Ad::class)
         -> setPage($page)
-        -> setLimit(6);
+        -> setLimit(8);
 
         $ads = $repo->findAll();
-          
+
+        
         return $this->render('ad/index.html.twig', [
             'ads' => $ads,
             'pagination' => $pagination,  
@@ -162,11 +163,12 @@ class AdController extends AbstractController
      * @return Response
      * 
      */
-    public function show(Ad $ad, Request $request, ObjectManager $manager)
+    public function show(Ad $ad, Request $request, ObjectManager $manager, AdRepository $repo)
 
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
+       
    
 
         $form->handleRequest($request);
@@ -187,7 +189,9 @@ class AdController extends AbstractController
         return $this->render('ad/show.html.twig', [
          'ad' => $ad,
          'form'    => $form->createView() ,
-         'id' => $ad->getId()
+         'id' => $ad->getId(),
+      
+        
         ]);
     }
 
@@ -213,6 +217,7 @@ class AdController extends AbstractController
         return $this->redirectToRoute("ad");
     }
  
+
 
 
 }

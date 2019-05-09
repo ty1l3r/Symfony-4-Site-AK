@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SortByDate{% endblock %}
+
+{% block body %}
+       
+ <div class="container mt-3">
+    
+
+           {% include 'search/searchBase.html.twig'%}
+
+
+                <div class="row">
+                {% dump(orderAds) %}
+                        {% for orderAd in orderAds %}
+                         {% include 'ad/_ad.html.twig' with {'ad': orderAd} %}
+                         {% endfor %}
+                </div>
+</div>
+{% endblock %}

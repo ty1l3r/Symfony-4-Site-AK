@@ -17,7 +17,7 @@
                 <th>Durée</th>
                 <th class="text-center align-middle">Prix</th>
                 <th>Auteur</th>
-                <th class="text-center align-middle">Photo</th>
+                <th class="text-center align-middle">Track</th>
                 <th class="text-center align-middle">Action</th>
             </thead>
             <tbody>
@@ -32,11 +32,16 @@
                     <td>{{ad.duree| date('H:i') }} </td>
                     <td class="text-center"><span class="badge badge-primary rounded">{{ad.price | number_format(2,","," ")}} Euros</span></td>
                     <td><img style="max-height:100px; max-width:100px;" class="mr-4"
-                    src="{{ad.author.picture}}" alt="">{{ad.author.firstName}} {{ad.author.lastName}}</td>                    
+                    src="{{ad.author.picture}}" alt="">{{ad.author.firstName}} {{ad.author.lastName}}</td>  
+                
+                    <td> <iframe width="50%" height="150" scrolling="no" frameborder="no" allow="autoplay"
+                        src="https://w.soundcloud.com/player/?url={{ad.soundcloud}}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe></td> 
+            
                   <td class="text-center align-middle">
                     <a href="{{ path ('admin_ads_edit' , {'id': ad.id }) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                     <a href="{{ path ('admin_ads_delete' , {'id': ad.id }) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                   </td>
+                  
                 {% endfor %}
                 </tr>      
             </tbody>

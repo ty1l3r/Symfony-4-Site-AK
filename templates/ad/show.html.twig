@@ -10,33 +10,33 @@
     <div class="row mt-3">
         <div class="col order-2">
             <div class="card border-secondary mb-3 ">
-        <div class="card-body pl-1 pr-1 pt-3 pb-1">
-    <div class="media">
-    {% set a = ad.author %}
-        <div class="col-md-2 pl-1 pr-0">
-            <div class="media-left align-self-center">
-                <a href="{{path('user_show', {'slug': a.slug})}}">
-                    <img class="rounded-circle3 mb-1 ml-2" src=" {{ ad.author.picture  }}"
-                     alt="avatar de {{ad.author.firstName}}"></a>
-                <a href=" {{ path('user_show' , {'slug': a.slug } ) }} ">
-                    <h6 class="mt-1">{{ad.author.firstName}}
-                </a> a posté
-                {{ ad.author.ads | length}} tracks</h6>
-            </div>
-        </div>
-        <div class="col-md-8 justify-content-center">
-            <div class="media-body">
-                <h4> {{ad.author.introduction}}</h4>
-                <p class="p3"> </p>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="media-right align-self-center">
-                <a href="#" class="btn btn-default">Contact Now</a>
-            </div>
-        </div>
-    </div>
-        </div>
+                <div class="card-body pl-1 pr-1 pt-3 pb-1">
+                    <div class="media">
+                        {% set a = ad.author %}
+                        <div class="col-md-2 pl-1 pr-0">
+                            <div class="media-left align-self-center">
+                                <a href="{{path('user_show', {'slug': a.slug})}}">
+                                    <img class="rounded-circle3 mb-1 ml-2" src=" {{ ad.author.picture  }}"
+                                        alt="avatar de {{ad.author.firstName}}"></a>
+                                <a href=" {{ path('user_show' , {'slug': a.slug } ) }} ">
+                                    <h6 class="mt-1">{{ad.author.firstName}}
+                                </a> a posté
+                                {{ ad.author.ads | length}} tracks</h6>
+                            </div>
+                        </div>
+                        <div class="col-md-8 justify-content-center">
+                            <div class="media-body">
+                                <h4> {{ad.author.introduction}}</h4>
+                                <p class="p3"> </p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="media-right align-self-center">
+                                <a href="#" class="btn btn-default">Contact Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -54,43 +54,53 @@
                     <a href="{{ path('tr-edit', {'id':ad.id}) }} " class="btn btn-warning float-right mt-3">Editer</a>
                     {% endif %}
                     <hr>
-                <div class="card-text">
-                    <h6><strong> Genre : </strong>{{ ad.genre }} </h6>
-                    <h6><strong> Durée : </strong>{{ ad.duree| date('H:i') }} </h6>
-                    <h6><strong> Année de sortie: </strong>{{ ad.annee }} </h6>
-                    <h6><strong> Prix : </strong>{{ ad.price }} Euros </h6>
-                    <hr>
-                </div>
-    {#=====  IFRAM SOUNDCLOUD ====== #}
-    <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
-        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/539018871&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
-    </iframe>
-    {#=====  EOSOUNDCLOUD ====== #}
-    <a href="" class="btn btn-success mt-3">Acheter</a><br /> 
+                    <div class="card-text">
+                        <h6><strong> Genre : </strong>{{ ad.genre }} </h6>
+                        <h6><strong> Durée : </strong>{{ ad.duree| date('H:i') }} </h6>
+                        <h6><strong> Année de sortie: </strong>{{ ad.annee }} </h6>
+                        <h6><strong> Prix : </strong>{{ ad.price }} Euros </h6>
+                        <hr>
+                    </div>
+                    {#=====  IFRAM SOUNDCLOUD ====== #}
 
-            <div class="alert alert-light pl-0 mb-1 pb-1">
-                {% if app.user %}
-                {% set comment = ad.commentFromAuthor(app.user) %}
-                {% if comment is not null %}
-                <h6 class="pl-1">
-                    Merci d'avoir noté cette Track
-                </h6>
-                {% else %}
-                <h6 class="alert-heading" style="font-size:18px; color: #e1e042;">Votre avis compte</h6>
-                {{ form_start(form) }}
-                {{ form_widget(form) }}
-                <button type="submit" class="btn btn-success">Confirmer</button>
-                {{ form_end(form) }}
+                    {% if ad.soundcloud %}
+
+                    <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
+                        src="https://w.soundcloud.com/player/?url={{ad.soundcloud}}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+                    {% else %}
+                    <div class="alert alert-dismissible alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Aucun lien Soundcloud. Merci d'éditer votre track et insérer un lien valide !</strong><a href="#" class="alert-link"></a>
+                        
+                </div>
                 {% endif %}
-                {% else %}
-                <h6>Veuillez vous connecter ou vous inscrire pour pouvoir noter cette track</h6>
-                {% endif %}
-            </div>
+
+                {#=====  EOSOUNDCLOUD ====== #}
+                <a href="" class="btn btn-success mt-3">Acheter</a><br />
+
+                <div class="alert alert-light pl-0 mb-1 pb-1">
+                    {% if app.user %}
+                    {% set comment = ad.commentFromAuthor(app.user) %}
+                    {% if comment is not null %}
+                    <h6 class="pl-1">
+                       <hr> Merci d'avoir noté cette Track
+                    </h6>
+                    {% else %}
+                    <h6 class="alert-heading" style="font-size:18px; color: #e1e042;">Votre avis compte</h6>
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button type="submit" class="btn btn-success">Confirmer</button>
+                    {{ form_end(form) }}
+                    {% endif %}
+                    {% else %}
+                    <h6>Veuillez vous connecter ou vous inscrire pour pouvoir noter cette track</h6>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-    </div>
+</div>
+</div>
 </div>
 {#=====  COMMENTAIRES ====== #}
 <div class="container">
@@ -100,20 +110,20 @@
             <h4 class="alert-heading">
                 <div class="row align-items-center">
                     <div class="col-md-9">
-                        Note globale des visiteurs (<small> Calculé sur un total de 
-                        {% if ad.comments | length >1 %}
-                        {{ ad.comments | length }} notes</small> )
+                        Note globale des visiteurs (<small> Calculé sur un total de
+                            {% if ad.comments | length >1 %}
+                            {{ ad.comments | length }} notes</small> )
                         {% else %}
                         {{ ad.comments | length }} note</small> )
                         {% endif %}
                     </div>
                     <div class="col-md-3">
-                        {% include 'partials/rating.html.twig' with {'rating' : ad.avgRatings} %}             
+                        {% include 'partials/rating.html.twig' with {'rating' : ad.avgRatings} %}
                     </div>
                 </div>
             </h4>
         </div>
-    <hr class="hr4">
+        <hr class="hr4">
         {% for comment in ad.comments %}
         <a href=" {{ path('user_show' , {'slug': a.slug } ) }} " style="font-size: 19px;">
             <h6 class="p2">{{comment.author.firstName }}

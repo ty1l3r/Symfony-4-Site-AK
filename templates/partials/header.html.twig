@@ -1,24 +1,31 @@
 	{#========== NAVBAR ===========#}
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark pt-3">
-	    <a class="navbar-brand" href=" {{ path('homepage') }}">H4KH4</a>
-	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
-	        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="navbar-toggler-icon"></span>
-	    </button>
-	    <div class="collapse navbar-collapse" id="navbarColor02">
-	        <ul class="navbar-nav mr-auto">
-	            
-	            <li class="nav-item">
-	                <a class="nav-link" href=" {{ path('ad')}}">Tracklist</a>
-	            </li>
-	            <li class="nav-item">
-	                <a class="nav-link" href=" {{ path('fan')}}">Artistes</a>
-	            </li>
-	        </ul>
-	        <ul class="navbar-nav ml-auto">
+		<a class="navbar-brand" href=" {{ path('homepage') }}">H4KH4</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+			aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarColor02">
+			<ul class="navbar-nav mr-auto">
 
-	            {% if app.user %}
-	            {#========== Menu déroulant utilisateur connecté ===========#}
+				<li class="nav-item">
+					<a class="nav-link" href=" {{ path('ad')}}">Tracklist</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href=" {{ path('fan')}}">Users</a>
+				</li>
+			</ul>
+			<ul class="navbar-nav ml-auto">
+
+				{% if app.user %}
+				{#========== Barre de recherche ===========#}
+
+				{# <form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="text" placeholder="Search">
+					<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+				</form> #}
+
+				{#========== Menu déroulant utilisateur connecté ===========#}
 
 				<li class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="accountDropdownLink">
@@ -37,30 +44,30 @@
 					</div>
 				</li>
 
-	            {#========== EO ===========#}
-	            {% else %}
-	            <li class="nav-item">
-	                <a href=" {{ path('account_login')}} " class="nav-link">Connexion</a>
-	            </li>
+				{#========== EO ===========#}
+				{% else %}
+				<li class="nav-item">
+					<a href=" {{ path('account_login')}} " class="nav-link">Connexion</a>
+				</li>
 
-	            <li class="nav-item">
-	                <a href="{{ path ('account_register')}}" class="nav-link">Inscription</a>
-	            </li>
-	            {% endif %}
+				<li class="nav-item">
+					<a href="{{ path ('account_register')}}" class="nav-link">Inscription</a>
+				</li>
+				{% endif %}
 
-	        </ul>
-	    </div>
+			</ul>
+		</div>
 	</nav>
 
 	{#========== Message d'alertes ===========#}
 
 	{% for label, messages in app.flashes %}
 	<div class="container mt-4">
-	    <div class="alert alert-{{ label }}">
-	        {% for message in messages %}
-	        <p> {{ message | raw }}</p>
-	        {% endfor %}
-	    </div>
+		<div class="alert alert-{{ label }}">
+			{% for message in messages %}
+			<p> {{ message | raw }}</p>
+			{% endfor %}
+		</div>
 	</div>
 	{% endfor %}
 	{#========== EO Message d'alertes ===========#}
