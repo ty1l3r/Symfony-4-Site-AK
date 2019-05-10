@@ -12,6 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SearchDateController extends AbstractController
 {
+
+
+    
     /**
      * @Route("/tracklist/search-date/{page<\d+>?1}", name="searchDate")
      */
@@ -21,9 +24,6 @@ class SearchDateController extends AbstractController
      $page, AdRepository $repo)
     {
        
-        $pagination->setEntityClass(Ad::class)
-        ->setPage($page)
-        ->setLimit(8);
 
        $orderAds = $manager->createQuery(
         'SELECT u
@@ -32,13 +32,19 @@ class SearchDateController extends AbstractController
         ')
                             ->getResult(); 
 
-      
+        $pagination->setEntityClass(Ad::class)
+        ->setPage($page)
+        ->setLimit(8);
+
             
         return $this->render('search/searchDate.html.twig', [
             'orderAds' =>$orderAds,
             'pagination' => $pagination,
            
         ]);
-    }    
+    }   
+    
+    
+
  
 }

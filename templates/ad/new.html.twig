@@ -5,24 +5,41 @@
 
 {% block body %}
 
-<div class="container mt-3">
+<div class="container mt-6">
+
 
 <!-- FAIRE UN IF  -->
 
-{% if editMode %}
-    <h1>Modification de la Track</h1>
-{% else %}
-    <h1> Poster une nouvelle Track </h1>
-{% endif %}
+
 
 <!-- ======================= -->
 
 <br>
-    {{ form_start(form) }}
+
+    </br></br>
+    
+
+
+
+<div class="card border-info mb-3" style="">
+  <div class="card-header">
+  {% if editMode %}
+    <h4>Modification de la Track</h4>
+{% else %}
+    <h4> Poster une nouvelle Track </h4>
+{% endif %}
+  </div>
+
+  <div class="card-body">
+
+
+
+      {{ form_start(form) }}
     {{ form_widget(form )}}
     <button type="submit" class="btn btn-primary"> Valider </button>
     {{ form_end(form) }}
-    </br></br>
-    
+  </div>
+
+
 </div>
 {% endblock %}

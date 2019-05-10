@@ -11,9 +11,9 @@
 
 
                 <div class="row">
-                {% dump(orderAds) %}
-                        {% for orderAd in orderAds %}
-                         {% include 'ad/_ad.html.twig' with {'ad': orderAd} %}
+             
+                        {% for orderAds in pagination.data %}
+                         {% include 'ad/_ad.html.twig' with {'ad': orderAds} %}
                          {% endfor %}
                 </div>
 </div>
