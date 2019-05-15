@@ -20,15 +20,16 @@ class AdminUsersController extends AbstractController
      */
     public function index(AdRepository $repo, $page, PaginationService $pagination)
     {
-        $pagination->setEntityClass(User::class);
-        $pagination->setEntityClass(Ad::class)
+        $pagination->setEntityClass(User::class)
         -> setPage($page)
         -> setLimit(6);
 
 
-        return $this->render('admin/ad/index.html.twig', [
+        return $this->render('admin/users/index.html.twig', [
            
             'pagination' => $pagination,
+        
+             
     
         ]);
     }
@@ -49,7 +50,7 @@ class AdminUsersController extends AbstractController
 
         $this->addFlash(
             'success',
-            "Le Commentaire <strong></strong> a bien été supprimée !"
+            "L'utilisateur <strong></strong> a bien été supprimée !"
         
 
         );

@@ -42,8 +42,10 @@
         <td>{{user.email}}</td>
         <td class="text-center align-middle"><a href= "" 
         class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a></td>
+
        <td class="text-center align-middle"><a href="{{ path ('admin_users_delete' , {'id': user.id }) }}"  
         class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td> 
+        
                 </tr>
                 </tbody>
                {% endfor %}

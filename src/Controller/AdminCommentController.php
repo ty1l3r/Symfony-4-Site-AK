@@ -10,6 +10,7 @@ use App\Service\PaginationService;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminCommentController extends AbstractController
@@ -41,10 +42,9 @@ class AdminCommentController extends AbstractController
      * Permet d'éditer les commentaires
      *@Route ("admin/comments/{id}/edit", name="admin_comm_edit")
      * @param AdRepository $repo
-     * @param Ad $ad
      * @return void
      */
-    public function edit(Comment $comment, Request $request, ObjectManager $manager, Ad $ad){
+    public function edit(Comment $comment, Request $request, ObjectManager $manager){
         
     
         $form = $this->createForm(CommentType::class, $comment);
@@ -72,7 +72,6 @@ class AdminCommentController extends AbstractController
      * permet de supprimer une annonce
      * @Route ("/admin/comments/{id}/delete", name="admin_comm_delete")
      *
-     * @param Ad $ad
      * @param ObjectManager $manager
      * @return Reponse
      */

@@ -1,7 +1,9 @@
 <?php
 namespace App\Service;
 
+use App\Entity\Ad;
 use Twig\Environment;
+use App\Entity\Comment;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\RequestStack;
